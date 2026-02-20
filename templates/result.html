@@ -1,0 +1,12 @@
+<h2>Eligible Schemes</h2>
+
+{% if schemes %}
+    {% for scheme in schemes %}
+        <h3>{{ scheme.scheme_name }}</h3>
+        <p><b>Benefits:</b> {{ scheme.benefits }}</p>
+        <p><b>Documents Required:</b> {{ scheme.documents }}</p>
+        <hr>
+    {% endfor %}
+{% else %}
+    <p>No schemes found for your eligibility.</p>
+{% endif %}

@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Scheme Portal</title>
+    <title>Student Scheme Awareness Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+
+<div class="container">
     <h1>State-Level Student Scheme Awareness Portal</h1>
-    <p>Welcome to our project homepage.</p>
+
+    <h3>Check Your Eligibility</h3>
+
+    <form method="POST" action="/check">
+
+        <label>Education Level</label>
+        <input type="text" name="education" required>
+
+        <label>Family Income (Annual)</label>
+        <input type="number" name="income" required>
+
+        <label>Category</label>
+        <input type="text" name="category" required>
+
+        <label>Gender</label>
+        <input type="text" name="gender" required>
+
+        <label>Age</label>
+        <input type="number" name="age" required>
+
+        <button type="submit">Check Eligibility</button>
+
+    </form>
+</div>
+
 </body>
 </html>
-
