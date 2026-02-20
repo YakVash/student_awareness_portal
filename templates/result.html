@@ -1,12 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eligible Schemes</title>
+</head>
+<body>
+
 <h2>Eligible Schemes</h2>
 
 {% if schemes %}
     {% for scheme in schemes %}
         <h3>{{ scheme.scheme_name }}</h3>
-        <p><b>Benefits:</b> {{ scheme.benefits }}</p>
-        <p><b>Documents Required:</b> {{ scheme.documents }}</p>
+        <p><strong>Benefits:</strong> {{ scheme.benefits }}</p>
+        <p><strong>Documents:</strong> {{ scheme.documents }}</p>
         <hr>
     {% endfor %}
 {% else %}
-    <p>No schemes found for your eligibility.</p>
+    <p>No eligible schemes found.</p>
 {% endif %}
+
+<a href="/">Go Back</a>
+
+</body>
+</html>
