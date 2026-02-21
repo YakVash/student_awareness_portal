@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Scheme</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Add New Scheme</h2>
+
+    <form method="POST" action="/save-scheme">
+
+        <label>Scheme Name</label>
+        <input type="text" name="scheme_name" required>
+
+        <label>Education Level</label>
+        <input type="text" name="education" required>
+
+        <label>Max Income</label>
+        <input type="number" name="max_income" required>
+
+        <label>Category</label>
+        <input type="text" name="category" required>
+
+        <label>Gender</label>
+        <input type="text" name="gender" required>
+
+        <label>Minimum Age</label>
+        <input type="number" name="min_age" required>
+
+        <label>Maximum Age</label>
+        <input type="number" name="max_age" required>
+
+        <label>Benefits</label>
+        <input type="text" name="benefits" required>
+
+        <label>Documents Required</label>
+        <input type="text" name="documents" required>
+
+        <button type="submit">Add Scheme</button>
+
+    </form>
+
+    <a href="/admin">Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>
