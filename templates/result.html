@@ -2,23 +2,30 @@
 <html>
 <head>
     <title>Eligible Schemes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<h2>Eligible Schemes</h2>
+<div class="container">
+    <h2>Eligible Schemes</h2>
 
-{% if schemes %}
-    {% for scheme in schemes %}
-        <h3>{{ scheme.scheme_name }}</h3>
-        <p><strong>Benefits:</strong> {{ scheme.benefits }}</p>
-        <p><strong>Documents:</strong> {{ scheme.documents }}</p>
-        <hr>
-    {% endfor %}
-{% else %}
-    <p>No eligible schemes found.</p>
-{% endif %}
+    {% if schemes %}
+        {% for scheme in schemes %}
+            <div class="scheme-card">
+                <h3>{{ scheme.scheme_name }}</h3>
+                <p><strong>Benefits:</strong> {{ scheme.benefits }}</p>
+                <p><strong>Required Documents:</strong> {{ scheme.documents }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No eligible schemes found based on your details.</p>
+    {% endif %}
 
-<a href="/">Go Back</a>
+    <a href="/check-form">
+        <button>Check Again</button>
+    </a>
+
+</div>
 
 </body>
 </html>

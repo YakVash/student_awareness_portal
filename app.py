@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session
 import mysql.connector
 
 app = Flask(__name__)
+app.secret_key = "secret123"
 
 # Database connection
 db = mysql.connector.connect(
@@ -17,10 +18,6 @@ def landing():
 
 @app.route('/check-form')
 def form():
-    return render_template("index.html")
-
-@app.route('/')
-def home():
     return render_template("index.html")
 
 @app.route('/check', methods=['POST'])
@@ -58,16 +55,89 @@ def admin_login():
     username = request.form['username']
     password = request.form['password']
 
-    # Simple hardcoded authentication
     if username == "admin" and password == "admin123":
-        return render_template("admin_dashboard.html")
+        session['admin_logged_in'] = True
+        return redirect(url_for('admin_dashboard'))
     else:
-        return "<h3>Invalid Credentials</h3><a href='/admin'>Try Again</a>"
+        return "Invalid Credentials"
+    
+@app.route('/admin-dashboard')
+def admin_dashboard():
+    if 'admin_logged_in' in session:
+        cursor = db.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM schemes")
+        schemes = cursor.fetchall()
+        return render_template("admin_dashboard.html", schemes=schemes)
+    else:
+        return redirect(url_for('admin'))
+    
+@app.route('/logout')
+def logout():
+    session.pop('admin_logged_in', None)
+    return redirect(url_for('admin'))
     
 @app.route('/add-scheme')
 def add_scheme():
-    return render_template("add_scheme.html")
+    if 'admin_logged_in' in session:
+        return render_template("add_scheme.html")
+    else:
+        return redirect(url_for('admin'))
+    
+@app.route('/delete-scheme/<int:id>')
+def delete_scheme(id):
+    if 'admin_logged_in' in session:
+        cursor = db.cursor()
+        cursor.execute("DELETE FROM schemes WHERE id = %s", (id,))
+        db.commit()
+        return redirect(url_for('admin_dashboard'))
+    else:
+        return redirect(url_for('admin'))
+    
+@app.route('/edit-scheme/<int:id>')
+def edit_scheme(id):
+    if 'admin_logged_in' in session:
+        cursor = db.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM schemes WHERE id = %s", (id,))
+        scheme = cursor.fetchone()
+        return render_template("edit_scheme.html", scheme=scheme)
+    else:
+        return redirect(url_for('admin'))
+    
+@app.route('/update-scheme/<int:id>', methods=['POST'])
+def update_scheme(id):
+    if 'admin_logged_in' in session:
+        scheme_name = request.form['scheme_name']
+        education = request.form['education']
+        max_income = request.form['max_income']
+        category = request.form['category']
+        gender = request.form['gender']
+        min_age = request.form['min_age']
+        max_age = request.form['max_age']
+        benefits = request.form['benefits']
+        documents = request.form['documents']
 
+        cursor = db.cursor()
+        query = """
+        UPDATE schemes
+        SET scheme_name=%s,
+            education_level=%s,
+            max_income=%s,
+            category=%s,
+            gender=%s,
+            min_age=%s,
+            max_age=%s,
+            benefits=%s,
+            documents=%s
+        WHERE id=%s
+        """
+
+        cursor.execute(query, (scheme_name, education, max_income, category,
+                               gender, min_age, max_age, benefits, documents, id))
+        db.commit()
+
+        return redirect(url_for('admin_dashboard'))
+    else:
+        return redirect(url_for('admin'))
 
 @app.route('/save-scheme', methods=['POST'])
 def save_scheme():

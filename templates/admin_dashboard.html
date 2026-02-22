@@ -2,26 +2,36 @@
 <html>
 <head>
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<div class="container">
-    <h2>Welcome Admin</h2>
+<h2>Admin Dashboard</h2>
 
-    <p>You can now manage schemes.</p>
+<a href="/add-scheme">
+    <button>Add New Scheme</button>
+</a>
 
-    <a href="/add-scheme">
-        <button>Add New Scheme</button>
-    </a>
+<h3>Existing Schemes</h3>
 
-    <br><br>
+{% for scheme in schemes %}
+    <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+        <strong>{{ scheme.scheme_name }}</strong>
+        <br>
+        Income Limit: {{ scheme.max_income }}
+        <br>
+        <a href="/edit-scheme/{{ scheme.id }}">
+            <button>Edit</button>
+        </a>
+        <a href="/delete-scheme/{{ scheme.id }}">
+            <button>Delete</button>
+        </a>
+    </div>
+{% endfor %}
 
-    <a href="/">
-        <button>Logout</button>
-    </a>
-
-</div>
+<br>
+<a href="/logout">
+    <button>Logout</button>
+</a>
 
 </body>
 </html>

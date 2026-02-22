@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Scheme</title>
+</head>
+<body>
+
+<h2>Edit Scheme</h2>
+
+<form method="POST" action="/update-scheme/{{ scheme.id }}">
+
+    <label>Scheme Name</label>
+    <input type="text" name="scheme_name" value="{{ scheme.scheme_name }}" required>
+
+    <label>Education Level</label>
+    <input type="text" name="education" value="{{ scheme.education_level }}" required>
+
+    <label>Max Income</label>
+    <input type="number" name="max_income" value="{{ scheme.max_income }}" required>
+
+    <label>Category</label>
+    <input type="text" name="category" value="{{ scheme.category }}" required>
+
+    <label>Gender</label>
+    <input type="text" name="gender" value="{{ scheme.gender }}" required>
+
+    <label>Minimum Age</label>
+    <input type="number" name="min_age" value="{{ scheme.min_age }}" required>
+
+    <label>Maximum Age</label>
+    <input type="number" name="max_age" value="{{ scheme.max_age }}" required>
+
+    <label>Benefits</label>
+    <input type="text" name="benefits" value="{{ scheme.benefits }}" required>
+
+    <label>Documents</label>
+    <input type="text" name="documents" value="{{ scheme.documents }}" required>
+
+    <button type="submit">Update Scheme</button>
+</form>
+
+<br>
+<a href="/admin-dashboard">
+    <button>Back</button>
+</a>
+
+</body>
+</html>
