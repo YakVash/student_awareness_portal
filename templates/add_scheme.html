@@ -6,45 +6,54 @@
 </head>
 <body>
 
-<div class="container">
-    <h2>Add New Scheme</h2>
+    <nav class="navbar">
+        <div class="logo">Scheme Portal</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/check-form">Check Eligibility</a>
+            <a href="/admin">Admin</a>
+        </div>
+    </nav>
 
-    <form method="POST" action="/save-scheme">
+    <div class="container">
+        <h2>Add New Scheme</h2>
 
-        <label>Scheme Name</label>
-        <input type="text" name="scheme_name" required>
+        <form method="POST" action="/save-scheme">
 
-        <label>Education Level</label>
-        <input type="text" name="education" required>
+            <label>Scheme Name</label>
+            <input type="text" name="scheme_name" required>
 
-        <label>Max Income</label>
-        <input type="number" name="max_income" required>
+            <label>Education Level</label>
+            <input type="text" name="education" required>
 
-        <label>Category</label>
-        <input type="text" name="category" required>
+            <label>Max Income</label>
+            <input type="number" name="max_income" required>
 
-        <label>Gender</label>
-        <input type="text" name="gender" required>
+            <label>Category</label>
+            <input type="text" name="category" required>
 
-        <label>Minimum Age</label>
-        <input type="number" name="min_age" required>
+            <label>Gender</label>
+            <input type="text" name="gender" required>
 
-        <label>Maximum Age</label>
-        <input type="number" name="max_age" required>
+            <label>Minimum Age</label>
+            <input type="number" name="min_age" required>
 
-        <label>Benefits</label>
-        <input type="text" name="benefits" required>
+            <label>Maximum Age</label>
+            <input type="number" name="max_age" required>
 
-        <label>Documents Required</label>
-        <input type="text" name="documents" required>
+            <label>Benefits</label>
+            <input type="text" name="benefits" required>
 
-        <button type="submit">Add Scheme</button>
+            <label>Documents Required</label>
+            <input type="text" name="documents" required>
 
-    </form>
+            <button type="submit">Add Scheme</button>
 
-    <a href="/admin">Back to Dashboard</a>
+        </form>
 
-</div>
+        <a href="/admin">Back to Dashboard</a>
+
+    </div>
 
 </body>
 </html>

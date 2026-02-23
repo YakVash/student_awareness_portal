@@ -64,9 +64,18 @@ def admin_login():
 @app.route('/admin-dashboard')
 def admin_dashboard():
     if 'admin_logged_in' in session:
+        search_query = request.args.get('search')
+
         cursor = db.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM schemes")
+
+        if search_query:
+            cursor.execute("SELECT * FROM schemes WHERE scheme_name LIKE %s", 
+                           ('%' + search_query + '%',))
+        else:
+            cursor.execute("SELECT * FROM schemes")
+
         schemes = cursor.fetchall()
+
         return render_template("admin_dashboard.html", schemes=schemes)
     else:
         return redirect(url_for('admin'))

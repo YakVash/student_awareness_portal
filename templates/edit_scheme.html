@@ -2,47 +2,57 @@
 <html>
 <head>
     <title>Edit Scheme</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<h2>Edit Scheme</h2>
+    <nav class="navbar">
+        <div class="logo">Scheme Portal</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/check-form">Check Eligibility</a>
+            <a href="/admin">Admin</a>
+        </div>
+    </nav>
 
-<form method="POST" action="/update-scheme/{{ scheme.id }}">
+    <h2>Edit Scheme</h2>
 
-    <label>Scheme Name</label>
-    <input type="text" name="scheme_name" value="{{ scheme.scheme_name }}" required>
+    <form method="POST" action="/update-scheme/{{ scheme.id }}">
 
-    <label>Education Level</label>
-    <input type="text" name="education" value="{{ scheme.education_level }}" required>
+        <label>Scheme Name</label>
+        <input type="text" name="scheme_name" value="{{ scheme.scheme_name }}" required>
 
-    <label>Max Income</label>
-    <input type="number" name="max_income" value="{{ scheme.max_income }}" required>
+        <label>Education Level</label>
+        <input type="text" name="education" value="{{ scheme.education_level }}" required>
 
-    <label>Category</label>
-    <input type="text" name="category" value="{{ scheme.category }}" required>
+        <label>Max Income</label>
+        <input type="number" name="max_income" value="{{ scheme.max_income }}" required>
 
-    <label>Gender</label>
-    <input type="text" name="gender" value="{{ scheme.gender }}" required>
+        <label>Category</label>
+        <input type="text" name="category" value="{{ scheme.category }}" required>
 
-    <label>Minimum Age</label>
-    <input type="number" name="min_age" value="{{ scheme.min_age }}" required>
+        <label>Gender</label>
+        <input type="text" name="gender" value="{{ scheme.gender }}" required>
 
-    <label>Maximum Age</label>
-    <input type="number" name="max_age" value="{{ scheme.max_age }}" required>
+        <label>Minimum Age</label>
+        <input type="number" name="min_age" value="{{ scheme.min_age }}" required>
 
-    <label>Benefits</label>
-    <input type="text" name="benefits" value="{{ scheme.benefits }}" required>
+        <label>Maximum Age</label>
+        <input type="number" name="max_age" value="{{ scheme.max_age }}" required>
 
-    <label>Documents</label>
-    <input type="text" name="documents" value="{{ scheme.documents }}" required>
+        <label>Benefits</label>
+        <input type="text" name="benefits" value="{{ scheme.benefits }}" required>
 
-    <button type="submit">Update Scheme</button>
-</form>
+        <label>Documents</label>
+        <input type="text" name="documents" value="{{ scheme.documents }}" required>
 
-<br>
-<a href="/admin-dashboard">
-    <button>Back</button>
-</a>
+        <button type="submit">Update Scheme</button>
+    </form>
+
+    <br>
+    <a href="/admin-dashboard">
+        <button>Back</button>
+    </a>
 
 </body>
 </html>

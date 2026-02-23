@@ -2,36 +2,51 @@
 <html>
 <head>
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<h2>Admin Dashboard</h2>
+    <h2>Admin Dashboard</h2>
 
-<a href="/add-scheme">
-    <button>Add New Scheme</button>
-</a>
+    <form method="GET" action="/admin-dashboard">
+        <input type="text" name="search" placeholder="Search Scheme Name">
+        <button type="submit">Search</button>
+    </form>
 
-<h3>Existing Schemes</h3>
+    <a href="/add-scheme">
+        <button>Add New Scheme</button>
+    </a>
 
-{% for scheme in schemes %}
-    <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-        <strong>{{ scheme.scheme_name }}</strong>
-        <br>
-        Income Limit: {{ scheme.max_income }}
-        <br>
-        <a href="/edit-scheme/{{ scheme.id }}">
-            <button>Edit</button>
-        </a>
-        <a href="/delete-scheme/{{ scheme.id }}">
-            <button>Delete</button>
-        </a>
-    </div>
-{% endfor %}
+    <nav class="navbar">
+        <div class="logo">Scheme Portal</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/check-form">Check Eligibility</a>
+            <a href="/admin">Admin</a>
+        </div>
+    </nav>
 
-<br>
-<a href="/logout">
-    <button>Logout</button>
-</a>
+    <h3>Existing Schemes</h3>
+
+    {% for scheme in schemes %}
+        <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+            <strong>{{ scheme.scheme_name }}</strong>
+            <br>
+            Income Limit: {{ scheme.max_income }}
+            <br>
+            <a href="/edit-scheme/{{ scheme.id }}">
+                <button>Edit</button>
+            </a>
+            <a href="/delete-scheme/{{ scheme.id }}">
+                <button>Delete</button>
+            </a>
+        </div>
+    {% endfor %}
+
+    <br>
+    <a href="/logout">
+        <button>Logout</button>
+    </a>
 
 </body>
 </html>

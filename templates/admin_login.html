@@ -5,25 +5,33 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <nav class="navbar">
+        <div class="logo">Scheme Portal</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/check-form">Check Eligibility</a>
+            <a href="/admin">Admin</a>
+        </div>
+    </nav>
 
-<div class="container">
-    <h2>Admin Login</h2>
+    <div class="container">
+        <h2>Admin Login</h2>
 
-    <form method="POST" action="/admin-login">
+        <form method="POST" action="/admin-login">
 
-        <label>Username</label>
-        <input type="text" name="username" required>
+            <label>Username</label>
+            <input type="text" name="username" required>
 
-        <label>Password</label>
-        <input type="password" name="password" required>
+            <label>Password</label>
+            <input type="password" name="password" required>
 
-        <button type="submit">Login</button>
+            <button type="submit">Login</button>
 
-    </form>
+        </form>
 
-    <a href="/">Back to Home</a>
+        <a href="/">Back to Home</a>
 
-</div>
+    </div>
 
 </body>
 </html>

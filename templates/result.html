@@ -6,26 +6,35 @@
 </head>
 <body>
 
-<div class="container">
-    <h2>Eligible Schemes</h2>
+    <nav class="navbar">
+        <div class="logo">Scheme Portal</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/check-form">Check Eligibility</a>
+            <a href="/admin">Admin</a>
+        </div>
+    </nav>
 
-    {% if schemes %}
-        {% for scheme in schemes %}
-            <div class="scheme-card">
-                <h3>{{ scheme.scheme_name }}</h3>
-                <p><strong>Benefits:</strong> {{ scheme.benefits }}</p>
-                <p><strong>Required Documents:</strong> {{ scheme.documents }}</p>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p>No eligible schemes found based on your details.</p>
-    {% endif %}
+    <div class="container">
+        <h2>Eligible Schemes</h2>
 
-    <a href="/check-form">
-        <button>Check Again</button>
-    </a>
+        {% if schemes %}
+            {% for scheme in schemes %}
+                <div class="scheme-card">
+                    <h3>{{ scheme.scheme_name }}</h3>
+                    <p><strong>Benefits:</strong> {{ scheme.benefits }}</p>
+                    <p><strong>Required Documents:</strong> {{ scheme.documents }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No eligible schemes found based on your details.</p>
+        {% endif %}
 
-</div>
+        <a href="/check-form">
+            <button>Check Again</button>
+        </a>
+
+    </div>
 
 </body>
 </html>
