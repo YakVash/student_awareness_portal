@@ -1,37 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="logo">Scheme Portal</div>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/check-form">Check Eligibility</a>
-            <a href="/admin">Admin</a>
-        </div>
-    </nav>
+{% extends "base.html" %}
 
-    <div class="container">
-        <h2>Admin Login</h2>
+{% block title %}Admin Login{% endblock %}
 
-        <form method="POST" action="/admin-login">
+{% block content %}
 
-            <label>Username</label>
-            <input type="text" name="username" required>
+<div class="container">
 
-            <label>Password</label>
-            <input type="password" name="password" required>
+    <h2>Admin Login</h2>
 
-            <button type="submit">Login</button>
+    <form method="POST" action="/admin-login">
 
-        </form>
+        <label>Username</label>
+        <input type="text" name="username" required>
 
-        <a href="/">Back to Home</a>
+        <label>Password</label>
+        <input type="password" name="password" required>
 
-    </div>
+        <button type="submit">Login</button>
 
-</body>
-</html>
+    </form>
+
+</div>
+
+{% endblock %}

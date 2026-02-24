@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Student Scheme Awareness Portal</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
 
-<nav class="navbar">
-    <div class="logo">Scheme Portal</div>
-    <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="/check-form">Check Eligibility</a>
-        <a href="/admin">Admin</a>
-    </div>
-</nav>
+{% block title %}Home{% endblock %}
+
+{% block content %}
 
 <div class="hero">
 
@@ -29,13 +18,8 @@
         <a href="/check-form">
             <button>Check Eligibility</button>
         </a>
-
-        <a href="/admin">
-            <button class="secondary-btn">Admin Login</button>
-        </a>
     </div>
 
 </div>
 
-</body>
-</html>
+{% endblock %}

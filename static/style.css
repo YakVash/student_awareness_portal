@@ -10,6 +10,7 @@ body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, #003366, #0055aa);
     color: white;
+    min-height: 100vh;
 }
 
 /* Navbar */
@@ -60,18 +61,65 @@ body {
     margin-top: 35px;
 }
 
-.hero-buttons button {
-    margin: 10px;
-    padding: 12px 28px;
-    font-size: 16px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    background-color: white;
-    color: #003366;
+/* Card Layout */
+.container {
+    max-width: 800px;
+    margin: 60px auto;
+    background: white;
+    color: #333;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+/* Forms */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    margin-bottom: 5px;
     font-weight: bold;
 }
 
-.hero-buttons button:hover {
-    background-color: #e6e6e6;
+input, select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #003366;
+    color: white;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #0055aa;
+}
+
+/* Scheme Cards */
+.scheme-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    background-color: #f4f6f8;
+}
+
+/* Admin Table Style */
+.admin-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
 }

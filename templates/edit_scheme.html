@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Scheme</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
 
-    <nav class="navbar">
-        <div class="logo">Scheme Portal</div>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/check-form">Check Eligibility</a>
-            <a href="/admin">Admin</a>
-        </div>
-    </nav>
+{% block title %}Edit Scheme{% endblock %}
+
+{% block content %}
+
+<div class="container">
 
     <h2>Edit Scheme</h2>
 
@@ -47,6 +38,7 @@
         <input type="text" name="documents" value="{{ scheme.documents }}" required>
 
         <button type="submit">Update Scheme</button>
+
     </form>
 
     <br>
@@ -54,5 +46,6 @@
         <button>Back</button>
     </a>
 
-</body>
-</html>
+</div>
+
+{% endblock %}

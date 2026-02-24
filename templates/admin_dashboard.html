@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="container">
 
     <h2>Admin Dashboard</h2>
 
@@ -13,27 +13,20 @@
         <button type="submit">Search</button>
     </form>
 
+    <br>
+
     <a href="/add-scheme">
         <button>Add New Scheme</button>
     </a>
 
-    <nav class="navbar">
-        <div class="logo">Scheme Portal</div>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/check-form">Check Eligibility</a>
-            <a href="/admin">Admin</a>
-        </div>
-    </nav>
-
-    <h3>Existing Schemes</h3>
+    <h3 style="margin-top:20px;">Existing Schemes</h3>
 
     {% for scheme in schemes %}
-        <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+        <div class="scheme-card">
             <strong>{{ scheme.scheme_name }}</strong>
             <br>
             Income Limit: {{ scheme.max_income }}
-            <br>
+            <br><br>
             <a href="/edit-scheme/{{ scheme.id }}">
                 <button>Edit</button>
             </a>
@@ -48,5 +41,6 @@
         <button>Logout</button>
     </a>
 
-</body>
-</html>
+</div>
+
+{% endblock %}

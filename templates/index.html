@@ -1,58 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Student Scheme Awareness Portal</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
 
-    <nav class="navbar">
-        <div class="logo">Scheme Portal</div>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/check-form">Check Eligibility</a>
-            <a href="/admin">Admin</a>
-        </div>
-    </nav>
+{% block title %}Check Eligibility{% endblock %}
 
-    <div class="container">
-        <h1>State-Level Student Scheme Awareness Portal</h1>
-        <h3>Check Your Eligibility</h3>
+{% block content %}
 
-        <form method="POST" action="/check">
+<div class="container">
 
-            <label>Education Level</label>
-            <select name="education" required>
-                <option value="">-- Select Education --</option>
-                <option value="UG">Undergraduate (UG)</option>
-                <option value="PG">Postgraduate (PG)</option>
-            </select>
+    <h2>Check Your Eligibility</h2>
 
-            <label>Family Income (Annual)</label>
-            <input type="number" name="income" placeholder="Enter annual income" required>
+    <form method="POST" action="/check">
 
-            <label>Category</label>
-            <select name="category" required>
-                <option value="">-- Select Category --</option>
-                <option value="SC">SC</option>
-                <option value="BC">BC</option>
-                <option value="Any">General</option>
-            </select>
+        <label>Education Level</label>
+        <select name="education" required>
+            <option value="UG">UG</option>
+            <option value="PG">PG</option>
+        </select>
 
-            <label>Gender</label>
-            <select name="gender" required>
-                <option value="">-- Select Gender --</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
+        <label>Family Income</label>
+        <input type="number" name="income" required>
 
-            <label>Age</label>
-            <input type="number" name="age" placeholder="Enter your age" required>
+        <label>Category</label>
+        <input type="text" name="category" required>
 
-            <button type="submit">Check Eligibility</button>
+        <label>Gender</label>
+        <input type="text" name="gender" required>
 
-        </form>
-    </div>
+        <label>Age</label>
+        <input type="number" name="age" required>
 
-</body>
-</html>
+        <button type="submit">Check Eligibility</button>
+
+    </form>
+
+</div>
+
+{% endblock %}
