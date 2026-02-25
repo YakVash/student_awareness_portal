@@ -169,29 +169,43 @@ def update_scheme(id):
 
 @app.route('/save-scheme', methods=['POST'])
 def save_scheme():
-    scheme_name = request.form['scheme_name']
-    education = request.form['education']
-    max_income = int(request.form['max_income'])
-    category = request.form['category']
-    gender = request.form['gender']
-    min_age = int(request.form['min_age'])
-    max_age = int(request.form['max_age'])
-    benefits = request.form['benefits']
-    documents = request.form['documents']
-    youtube_link = request.form['youtube_link']
+    if 'admin_logged_in' in session:
 
-    cursor = db.cursor()
+        scheme_name = request.form['scheme_name']
+        education = request.form['education']
+        max_income = int(request.form['max_income'])
+        category = request.form['category']
+        gender = request.form['gender']
+        min_age = int(request.form['min_age'])
+        max_age = int(request.form['max_age'])
+        benefits = request.form['benefits']
+        documents = request.form['documents']
+        official_link = request.form['official_link']
+        youtube_link = request.form['youtube_link']
 
-    query = """
-    INSERT INTO schemes 
-    (scheme_name, education_level, max_income, category, gender, min_age, max_age, benefits, documents)
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-    """
+        cursor = db.cursor()
 
-    cursor.execute(query, (scheme_name, education, max_income, category, gender, min_age, max_age, benefits, documents))
-    db.commit()
+        query = """
+        INSERT INTO schemes 
+        (scheme_name, education_level, max_income, category, gender,
+         min_age, max_age, benefits, documents, official_link, youtube_link)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
 
-    return "<h3>Scheme Added Successfully!</h3><a href='/admin'>Back to Dashboard</a>"
+        cursor.execute(query, (
+            scheme_name, education, max_income,
+            category, gender,
+            min_age, max_age,
+            benefits, documents,
+            official_link, youtube_link
+        ))
+
+        db.commit()
+
+        return redirect(url_for('admin_dashboard'))
+
+    else:
+        return redirect(url_for('admin'))
 
 if __name__ == '__main__':
     app.run(debug=True)
