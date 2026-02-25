@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Scheme Details{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <h2>{{ scheme.scheme_name }}</h2>
+
+    <p><strong>Benefits:</strong> {{ scheme.benefits }}</p>
+
+    <p><strong>Required Documents:</strong></p>
+    <p>{{ scheme.documents }}</p>
+
+    <br>
+
+    <a href="{{ scheme.official_link }}" target="_blank">
+        <button>Visit Official Website</button>
+    </a>
+
+    <br><br>
+
+    <a href="{{ scheme.youtube_link }}" target="_blank">
+        <button>Watch How to Apply (YouTube)</button>
+    </a>
+
+    <br><br>
+
+    <a href="/check-form">
+        <button>Back</button>
+    </a>
+
+</div>
+
+{% endblock %}

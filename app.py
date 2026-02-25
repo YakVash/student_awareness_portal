@@ -84,7 +84,14 @@ def admin_dashboard():
 def logout():
     session.pop('admin_logged_in', None)
     return redirect(url_for('admin'))
-    
+
+@app.route('/scheme/<int:id>')
+def scheme_detail(id):
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM schemes WHERE id = %s", (id,))
+    scheme = cursor.fetchone()
+    return render_template("scheme_detail.html", scheme=scheme)
+
 @app.route('/add-scheme')
 def add_scheme():
     if 'admin_logged_in' in session:
@@ -115,6 +122,7 @@ def edit_scheme(id):
 @app.route('/update-scheme/<int:id>', methods=['POST'])
 def update_scheme(id):
     if 'admin_logged_in' in session:
+
         scheme_name = request.form['scheme_name']
         education = request.form['education']
         max_income = request.form['max_income']
@@ -124,8 +132,11 @@ def update_scheme(id):
         max_age = request.form['max_age']
         benefits = request.form['benefits']
         documents = request.form['documents']
+        official_link = request.form['official_link']
+        youtube_link = request.form['youtube_link']
 
         cursor = db.cursor()
+
         query = """
         UPDATE schemes
         SET scheme_name=%s,
@@ -136,12 +147,20 @@ def update_scheme(id):
             min_age=%s,
             max_age=%s,
             benefits=%s,
-            documents=%s
+            documents=%s,
+            official_link=%s,
+            youtube_link=%s
         WHERE id=%s
         """
 
-        cursor.execute(query, (scheme_name, education, max_income, category,
-                               gender, min_age, max_age, benefits, documents, id))
+        cursor.execute(query, (
+            scheme_name, education, max_income, category,
+            gender, min_age, max_age,
+            benefits, documents,
+            official_link, youtube_link,
+            id
+        ))
+
         db.commit()
 
         return redirect(url_for('admin_dashboard'))
@@ -159,6 +178,7 @@ def save_scheme():
     max_age = int(request.form['max_age'])
     benefits = request.form['benefits']
     documents = request.form['documents']
+    youtube_link = request.form['youtube_link']
 
     cursor = db.cursor()
 

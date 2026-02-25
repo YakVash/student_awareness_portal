@@ -11,9 +11,9 @@
     {% if schemes %}
         {% for scheme in schemes %}
             <div class="scheme-card">
-                <strong>{{ scheme.scheme_name }}</strong>
-                <p><strong>Benefits:</strong> {{ scheme.benefits }}</p>
-                <p><strong>Documents:</strong> {{ scheme.documents }}</p>
+                <a href="/scheme/{{ scheme.id }}">
+                    <strong>{{ scheme.scheme_name }}</strong>
+                </a>
             </div>
         {% endfor %}
     {% else %}
