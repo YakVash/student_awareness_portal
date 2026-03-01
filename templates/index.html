@@ -12,21 +12,47 @@
 
         <label>Education Level</label>
         <select name="education" required>
-            <option value="UG">UG</option>
-            <option value="PG">PG</option>
+            <option value="">Select</option>
+            <option value="Primary">Primary</option>
+            <option value="Secondary">Secondary</option>
+            <option value="Higher Secondary">Higher Secondary</option>
+            <option value="Diploma">Diploma</option>
+            <option value="UG">Undergraduate (UG)</option>
+            <option value="PG">Postgraduate (PG)</option>
+            <option value="PhD">PhD</option>
         </select>
 
         <label>Family Income</label>
         <input type="number" name="income" required>
 
         <label>Category</label>
-        <input type="text" name="category" required>
+        <select name="category" required>
+            <option value="">Select</option>
+            <option value="SC">SC</option>
+            <option value="ST">ST</option>
+            <option value="OBC">OBC</option>
+            <option value="Any">General / Any</option>
+        </select>
 
         <label>Gender</label>
-        <input type="text" name="gender" required>
+        <select name="gender" required>
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Any">Any</option>
+        </select>
 
+        <label>Disability Status</label>
+        <select name="disability" required>
+            <option value="">Select</option>
+            <option value="Yes">PWD</option>
+            <option value="No">Non-PWD</option>
+        </select>
+        
         <label>Age</label>
         <input type="number" name="age" required>
+
+
 
         <button type="submit">Check Eligibility</button>
 

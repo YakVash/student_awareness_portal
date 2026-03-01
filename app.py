@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 import mysql.connector
 
 app = Flask(__name__)
@@ -26,8 +26,17 @@ def check():
     income = int(request.form['income'])
     category = request.form['category']
     gender = request.form['gender']
+    disability = request.form['disability']
     age = int(request.form['age'])
 
+    if age < 5:
+        flash("Invalid Age Entered")
+        return redirect(url_for('form'))
+
+    if income < 0:
+        flash("Income Cannot Be Negative")
+        return redirect(url_for('form'))
+    
     cursor = db.cursor(dictionary=True)
 
     query = """
@@ -36,11 +45,12 @@ def check():
     AND max_income >= %s
     AND (category = %s OR category = 'Any')
     AND (gender = %s OR gender = 'Any')
+    AND (disability = %s OR disability = 'Any')
     AND min_age <= %s
     AND max_age >= %s
     """
 
-    cursor.execute(query, (education, income, category, gender, age, age))
+    cursor.execute(query, (education, income, category, gender, disability, age, age))
     results = cursor.fetchall()
 
     return render_template("result.html", schemes=results)
@@ -64,19 +74,40 @@ def admin_login():
 @app.route('/admin-dashboard')
 def admin_dashboard():
     if 'admin_logged_in' in session:
-        search_query = request.args.get('search')
-
         cursor = db.cursor(dictionary=True)
 
+        # Fetch schemes (search support remains)
+        search_query = request.args.get('search')
+
         if search_query:
-            cursor.execute("SELECT * FROM schemes WHERE scheme_name LIKE %s", 
+            cursor.execute("SELECT * FROM schemes WHERE scheme_name LIKE %s",
                            ('%' + search_query + '%',))
         else:
             cursor.execute("SELECT * FROM schemes")
 
         schemes = cursor.fetchall()
 
-        return render_template("admin_dashboard.html", schemes=schemes)
+        # 📊 Statistics
+        cursor.execute("SELECT COUNT(*) as total FROM schemes")
+        total_schemes = cursor.fetchone()['total']
+
+        cursor.execute("SELECT COUNT(*) as ug_count FROM schemes WHERE education_level = 'UG'")
+        ug_count = cursor.fetchone()['ug_count']
+
+        cursor.execute("SELECT COUNT(*) as pg_count FROM schemes WHERE education_level = 'PG'")
+        pg_count = cursor.fetchone()['pg_count']
+
+        cursor.execute("SELECT COUNT(*) as pwd_count FROM schemes WHERE disability = 'Yes'")
+        pwd_count = cursor.fetchone()['pwd_count']
+
+        return render_template(
+            "admin_dashboard.html",
+            schemes=schemes,
+            total_schemes=total_schemes,
+            ug_count=ug_count,
+            pg_count=pg_count,
+            pwd_count=pwd_count
+        )
     else:
         return redirect(url_for('admin'))
     
@@ -128,6 +159,7 @@ def update_scheme(id):
         max_income = request.form['max_income']
         category = request.form['category']
         gender = request.form['gender']
+        disability = request.form['disability']
         min_age = request.form['min_age']
         max_age = request.form['max_age']
         benefits = request.form['benefits']
@@ -144,6 +176,7 @@ def update_scheme(id):
             max_income=%s,
             category=%s,
             gender=%s,
+            disability=%s,
             min_age=%s,
             max_age=%s,
             benefits=%s,
@@ -155,7 +188,7 @@ def update_scheme(id):
 
         cursor.execute(query, (
             scheme_name, education, max_income, category,
-            gender, min_age, max_age,
+            gender,disability, min_age, max_age,
             benefits, documents,
             official_link, youtube_link,
             id
@@ -180,6 +213,7 @@ def save_scheme():
         max_age = int(request.form['max_age'])
         benefits = request.form['benefits']
         documents = request.form['documents']
+        disability = request.form['disability']
         official_link = request.form['official_link']
         youtube_link = request.form['youtube_link']
 
@@ -188,8 +222,8 @@ def save_scheme():
         query = """
         INSERT INTO schemes 
         (scheme_name, education_level, max_income, category, gender,
-         min_age, max_age, benefits, documents, official_link, youtube_link)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        min_age, max_age, benefits, documents, official_link, youtube_link, disability)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
 
         cursor.execute(query, (
@@ -197,7 +231,8 @@ def save_scheme():
             category, gender,
             min_age, max_age,
             benefits, documents,
-            official_link, youtube_link
+            official_link, youtube_link,
+            disability
         ))
 
         db.commit()
