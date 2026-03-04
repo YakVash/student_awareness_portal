@@ -27,6 +27,7 @@ def check():
     category = request.form['category']
     gender = request.form['gender']
     disability = request.form['disability']
+    first_graduate = request.form['first_graduate']
     age = int(request.form['age'])
 
     if age < 5:
@@ -46,11 +47,12 @@ def check():
     AND (category = %s OR category = 'Any')
     AND (gender = %s OR gender = 'Any')
     AND (disability = %s OR disability = 'Any')
+    AND (first_graduate = %s OR first_graduate = 'Any')
     AND min_age <= %s
     AND max_age >= %s
     """
 
-    cursor.execute(query, (education, income, category, gender, disability, age, age))
+    cursor.execute(query, (education, income, category, gender, disability, first_graduate, age, age))
     results = cursor.fetchall()
 
     return render_template("result.html", schemes=results)
@@ -156,10 +158,11 @@ def update_scheme(id):
 
         scheme_name = request.form['scheme_name']
         education = request.form['education']
-        max_income = request.form['max_income']
+        max_income = int(request.form['max_income'])
         category = request.form['category']
         gender = request.form['gender']
         disability = request.form['disability']
+        first_graduate = request.form['first_graduate']
         min_age = request.form['min_age']
         max_age = request.form['max_age']
         benefits = request.form['benefits']
@@ -177,6 +180,7 @@ def update_scheme(id):
             category=%s,
             gender=%s,
             disability=%s,
+            first_graduate=%s,
             min_age=%s,
             max_age=%s,
             benefits=%s,
@@ -188,7 +192,7 @@ def update_scheme(id):
 
         cursor.execute(query, (
             scheme_name, education, max_income, category,
-            gender,disability, min_age, max_age,
+            gender,disability, first_graduate, min_age, max_age,
             benefits, documents,
             official_link, youtube_link,
             id
@@ -214,6 +218,7 @@ def save_scheme():
         benefits = request.form['benefits']
         documents = request.form['documents']
         disability = request.form['disability']
+        first_graduate = request.form['first_graduate']
         official_link = request.form['official_link']
         youtube_link = request.form['youtube_link']
 
@@ -222,8 +227,8 @@ def save_scheme():
         query = """
         INSERT INTO schemes 
         (scheme_name, education_level, max_income, category, gender,
-        min_age, max_age, benefits, documents, official_link, youtube_link, disability)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        min_age, max_age, benefits, documents, disability, first_graduate, official_link, youtube_link)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
 
         cursor.execute(query, (
@@ -231,8 +236,8 @@ def save_scheme():
             category, gender,
             min_age, max_age,
             benefits, documents,
-            official_link, youtube_link,
-            disability
+            disability, first_graduate,
+            official_link, youtube_link
         ))
 
         db.commit()
