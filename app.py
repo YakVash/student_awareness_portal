@@ -42,7 +42,7 @@ def check():
 
     query = """
     SELECT * FROM schemes
-    WHERE education_level = %s
+    WHERE (education_level = %s OR education_level = 'Any')
     AND max_income >= %s
     AND (category = %s OR category = 'Any')
     AND (gender = %s OR gender = 'Any')
@@ -89,6 +89,8 @@ def admin_dashboard():
             cursor.execute("SELECT * FROM schemes WHERE education_level='PG'")
         elif filter_type == "PWD":
             cursor.execute("SELECT * FROM schemes WHERE disability='Yes'")
+        elif filter_type == "Sports":
+            cursor.execute("SELECT * FROM schemes WHERE sports='Yes'")
         else:
             cursor.execute("SELECT * FROM schemes")
 
@@ -107,13 +109,17 @@ def admin_dashboard():
         cursor.execute("SELECT COUNT(*) as pwd_count FROM schemes WHERE disability = 'Yes'")
         pwd_count = cursor.fetchone()['pwd_count']
 
+        cursor.execute("SELECT COUNT(*) as sports_count FROM schemes WHERE sports='Yes'")
+        sports_count = cursor.fetchone()['sports_count']
+
         return render_template(
             "admin_dashboard.html",
             schemes=schemes,
             total_schemes=total_schemes,
             ug_count=ug_count,
             pg_count=pg_count,
-            pwd_count=pwd_count
+            pwd_count=pwd_count,
+            sports_count=sports_count
         )
     else:
         return redirect(url_for('admin'))
