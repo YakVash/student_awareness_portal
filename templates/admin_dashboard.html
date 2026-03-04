@@ -12,25 +12,25 @@
 
     <div style="display:flex; gap:20px; margin-bottom:20px; flex-wrap:wrap;">
 
-        <div class="scheme-card">
-            <strong>Total Schemes</strong>
-            <p>{{ total_schemes }}</p>
-        </div>
+    <a href="/admin-dashboard?filter=all" class="scheme-card">
+        <strong>Total Schemes</strong>
+        <p>{{ total_schemes }}</p>
+    </a>
 
-        <div class="scheme-card">
-            <strong>UG Schemes</strong>
-            <p>{{ ug_count }}</p>
-        </div>
+    <a href="/admin-dashboard?filter=UG" class="scheme-card">
+        <strong>UG Schemes</strong>
+        <p>{{ ug_count }}</p>
+    </a>
 
-        <div class="scheme-card">
-            <strong>PG Schemes</strong>
-            <p>{{ pg_count }}</p>
-        </div>
+    <a href="/admin-dashboard?filter=PG" class="scheme-card">
+        <strong>PG Schemes</strong>
+        <p>{{ pg_count }}</p>
+    </a>
 
-        <div class="scheme-card">
-            <strong>PWD Schemes</strong>
-            <p>{{ pwd_count }}</p>
-        </div>
+    <a href="/admin-dashboard?filter=PWD" class="scheme-card">
+        <strong>PWD Schemes</strong>
+        <p>{{ pwd_count }}</p>
+    </a>
 
     </div>
 

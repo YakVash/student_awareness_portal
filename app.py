@@ -55,6 +55,8 @@ def check():
     cursor.execute(query, (education, income, category, gender, disability, first_graduate, age, age))
     results = cursor.fetchall()
 
+    print(education, income, category, gender, disability, first_graduate, age)
+
     return render_template("result.html", schemes=results)
 
 @app.route('/admin')
@@ -79,16 +81,19 @@ def admin_dashboard():
         cursor = db.cursor(dictionary=True)
 
         # Fetch schemes (search support remains)
-        search_query = request.args.get('search')
+        filter_type = request.args.get('filter')
 
-        if search_query:
-            cursor.execute("SELECT * FROM schemes WHERE scheme_name LIKE %s",
-                           ('%' + search_query + '%',))
+        if filter_type == "UG":
+            cursor.execute("SELECT * FROM schemes WHERE education_level='UG'")
+        elif filter_type == "PG":
+            cursor.execute("SELECT * FROM schemes WHERE education_level='PG'")
+        elif filter_type == "PWD":
+            cursor.execute("SELECT * FROM schemes WHERE disability='Yes'")
         else:
             cursor.execute("SELECT * FROM schemes")
 
         schemes = cursor.fetchall()
-
+        
         # 📊 Statistics
         cursor.execute("SELECT COUNT(*) as total FROM schemes")
         total_schemes = cursor.fetchone()['total']
