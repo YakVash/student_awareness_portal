@@ -8,7 +8,13 @@
 
     <h2>{{ scheme.scheme_name }}</h2>
 
-    <p><strong>Benefits:</strong> {{ scheme.benefits }}</p>
+    <p><strong>Benefits:</strong></p>
+
+    <ul class="benefits-list">
+    {% for benefit in scheme.benefits.split('\n') %}
+    <li>{{ benefit }}</li>
+    {% endfor %}
+    </ul>
 
     <p><strong>Required Documents:</strong></p>
 

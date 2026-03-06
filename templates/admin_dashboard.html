@@ -10,31 +10,56 @@
 
     <h3>📊 Scheme Statistics</h3>
 
-    <div style="display:flex; gap:20px; margin-bottom:20px; flex-wrap:wrap;">
+    <div class="stats-grid">
 
-    <a href="/admin-dashboard?filter=all" class="scheme-card">
-        <strong>Total Schemes</strong>
-        <p>{{ total_schemes }}</p>
+    <a href="/admin-dashboard?filter=all" class="stat-card blue">
+    <h4>📚 Total Schemes</h4>
+    <p>{{ total_schemes }}</p>
     </a>
 
-    <a href="/admin-dashboard?filter=UG" class="scheme-card">
-        <strong>UG Schemes</strong>
-        <p>{{ ug_count }}</p>
+    <a href="/admin-dashboard?filter=UG" class="stat-card blue">
+    <h4>🎓 UG Schemes</h4>
+    <p>{{ ug_count }}</p>
     </a>
 
-    <a href="/admin-dashboard?filter=PG" class="scheme-card">
-        <strong>PG Schemes</strong>
-        <p>{{ pg_count }}</p>
+    <a href="/admin-dashboard?filter=PG" class="stat-card blue">
+    <h4>🎓 PG Schemes</h4>
+    <p>{{ pg_count }}</p>
     </a>
 
-    <a href="/admin-dashboard?filter=PWD" class="scheme-card">
-        <strong>PWD Schemes</strong>
-        <p>{{ pwd_count }}</p>
+    <a href="/admin-dashboard?filter=PWD" class="stat-card purple">
+    <h4>♿ PWD Schemes</h4>
+    <p>{{ pwd_count }}</p>
     </a>
 
-    <a href="/admin-dashboard?filter=Sports" class="scheme-card">
-        <strong>Sports Schemes</strong>
-        <p>{{ sports_count }}</p>
+    <a href="/admin-dashboard?filter=Sports" class="stat-card green">
+    <h4>🏅 Sports Schemes</h4>
+    <p>{{ sports_count }}</p>
+    </a>
+
+    <a href="/admin-dashboard?filter=Caste" class="stat-card orange">
+    <h4>🏛 Caste Schemes</h4>
+    <p>{{ caste_count }}</p>
+    </a>
+
+    <a href="/admin-dashboard?filter=Minority" class="stat-card teal">
+    <h4>🌍 Minority Schemes</h4>
+    <p>{{ minority_count }}</p>
+    </a>
+
+    <a href="/admin-dashboard?filter=Women" class="stat-card pink">
+    <h4>👩 Women / Girls</h4>
+    <p>{{ women_count }}</p>
+    </a>
+
+    <a href="/admin-dashboard?filter=Laptop" class="stat-card indigo">
+    <h4>💻 Laptop Schemes</h4>
+    <p>{{ laptop_count }}</p>
+    </a>
+
+    <a href="/admin-dashboard?filter=Research" class="stat-card dark">
+    <h4>🔬 Research Schemes</h4>
+    <p>{{ research_count }}</p>
     </a>
 
     </div>

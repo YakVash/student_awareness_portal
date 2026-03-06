@@ -85,12 +85,31 @@ def admin_dashboard():
 
         if filter_type == "UG":
             cursor.execute("SELECT * FROM schemes WHERE education_level='UG'")
+
         elif filter_type == "PG":
             cursor.execute("SELECT * FROM schemes WHERE education_level='PG'")
+
         elif filter_type == "PWD":
             cursor.execute("SELECT * FROM schemes WHERE disability='Yes'")
+
         elif filter_type == "Sports":
             cursor.execute("SELECT * FROM schemes WHERE sports='Yes'")
+
+        elif filter_type == "Caste":
+            cursor.execute("SELECT * FROM schemes WHERE category IN ('SC','ST','OBC')")
+
+        elif filter_type == "Minority":
+            cursor.execute("SELECT * FROM schemes WHERE category='Minority'")
+
+        elif filter_type == "Women":
+            cursor.execute("SELECT * FROM schemes WHERE gender='Female'")
+
+        elif filter_type == "Laptop":
+            cursor.execute("SELECT * FROM schemes WHERE scheme_name LIKE '%Laptop%' OR scheme_name LIKE '%Digital%'")
+
+        elif filter_type == "Research":
+            cursor.execute("SELECT * FROM schemes WHERE education_level='PhD'")
+
         else:
             cursor.execute("SELECT * FROM schemes")
 
@@ -112,6 +131,21 @@ def admin_dashboard():
         cursor.execute("SELECT COUNT(*) as sports_count FROM schemes WHERE sports='Yes'")
         sports_count = cursor.fetchone()['sports_count']
 
+        cursor.execute("SELECT COUNT(*) as caste_count FROM schemes WHERE category IN ('SC','ST','OBC')")
+        caste_count = cursor.fetchone()['caste_count']
+
+        cursor.execute("SELECT COUNT(*) as minority_count FROM schemes WHERE category='Minority'")
+        minority_count = cursor.fetchone()['minority_count']
+
+        cursor.execute("SELECT COUNT(*) as women_count FROM schemes WHERE gender='Female'")
+        women_count = cursor.fetchone()['women_count']
+
+        cursor.execute("SELECT COUNT(*) as laptop_count FROM schemes WHERE scheme_name LIKE '%Laptop%' OR scheme_name LIKE '%Digital%'")
+        laptop_count = cursor.fetchone()['laptop_count']
+
+        cursor.execute("SELECT COUNT(*) as research_count FROM schemes WHERE education_level='PhD'")
+        research_count = cursor.fetchone()['research_count']
+
         return render_template(
             "admin_dashboard.html",
             schemes=schemes,
@@ -119,7 +153,12 @@ def admin_dashboard():
             ug_count=ug_count,
             pg_count=pg_count,
             pwd_count=pwd_count,
-            sports_count=sports_count
+            sports_count=sports_count,
+            caste_count=caste_count,
+            minority_count=minority_count,
+            women_count=women_count,
+            laptop_count=laptop_count,
+            research_count=research_count
         )
     else:
         return redirect(url_for('admin'))
