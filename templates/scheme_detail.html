@@ -6,48 +6,58 @@
 
 <div class="container">
 
-    <h2>{{ scheme.scheme_name }}</h2>
+    <h2 class="scheme-title">{{ scheme.scheme_name }}</h2>
 
-    <p><strong>Benefits:</strong></p>
+    <!-- Benefits Section -->
+    <div class="info-card">
+        <h3>🎓 Benefits</h3>
 
-    <ul class="benefits-list">
-    {% for benefit in scheme.benefits.split('\n') %}
-    <li>{{ benefit }}</li>
-    {% endfor %}
-    </ul>
+        <ul class="benefits-list">
+            {% for benefit in scheme.benefits.split('\n') %}
+                <li>{{ benefit }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 
-    <p><strong>Required Documents:</strong></p>
+    <!-- Documents Section -->
+    <div class="info-card">
 
-    <table border="1" style="width:100%; border-collapse:collapse;">
-    <tr>
-    <th>Required Documents</th>
-    </tr>
+        <h3>📄 Required Documents</h3>
 
-    {% for doc in scheme.documents.split(',') %}
-    <tr>
-    <td>{{ doc }}</td>
-    </tr>
-    {% endfor %}
+        <table class="doc-table">
 
-    </table>
+            <tr>
+                <th>#</th>
+                <th>Document Name</th>
+            </tr>
 
-    <br>
+            {% for doc in scheme.documents.split(',') %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ doc }}</td>
+            </tr>
+            {% endfor %}
 
-    <a href="{{ scheme.official_link }}" target="_blank">
-        <button>Visit Official Website</button>
-    </a>
+        </table>
 
-    <br><br>
+    </div>
 
-    <a href="{{ scheme.youtube_link }}" target="_blank">
-        <button>Watch How to Apply (YouTube)</button>
-    </a>
+    <!-- Buttons -->
+    <div class="action-buttons">
 
-    <br><br>
+        <a href="{{ scheme.official_link }}" target="_blank">
+            <button class="primary-btn">🌐 Visit Official Website</button>
+        </a>
 
-    <a href="/check-form">
-        <button>Back</button>
-    </a>
+        <a href="{{ scheme.youtube_link }}" target="_blank">
+            <button class="secondary-btn">▶ Watch How to Apply</button>
+        </a>
+
+        <a href="/check-form">
+            <button class="back-btn">⬅ Back</button>
+        </a>
+
+    </div>
 
 </div>
 

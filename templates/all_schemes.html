@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}All Schemes{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+<h2>Available Government Schemes</h2>
+
+<p style="margin-bottom:20px;">
+Browse all scholarships and welfare schemes available in the portal.
+Click on a scheme to view details and application information.
+</p>
+
+{% for scheme in schemes %}
+
+<div class="scheme-card">
+
+    <a href="/scheme/{{ scheme.id }}">
+        <strong>{{ scheme.scheme_name }}</strong>
+    </a>
+
+    <br>
+
+    Education Level: {{ scheme.education_level }}
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

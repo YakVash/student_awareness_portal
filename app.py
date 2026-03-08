@@ -168,6 +168,17 @@ def logout():
     session.pop('admin_logged_in', None)
     return redirect(url_for('admin'))
 
+@app.route('/schemes')
+def all_schemes():
+
+    cursor = db.cursor(dictionary=True)
+
+    cursor.execute("SELECT * FROM schemes ORDER BY scheme_name")
+
+    schemes = cursor.fetchall()
+
+    return render_template("all_schemes.html", schemes=schemes)
+
 @app.route('/scheme/<int:id>')
 def scheme_detail(id):
     cursor = db.cursor(dictionary=True)

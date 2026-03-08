@@ -12,6 +12,7 @@
     </div>
     <div class="nav-links">
         <a href="/">Home</a>
+        <a href="/schemes">All Schemes</a>
         <a href="/check-form">Check Eligibility</a>
     </div>
 </nav>
@@ -28,6 +29,46 @@
 
 {% block content %}
 {% endblock %}
+
+<script>
+
+function animateCounter(id, target){
+
+let element = document.getElementById(id);
+let count = 0;
+let speed = target / 50;
+
+let interval = setInterval(function(){
+
+count += speed;
+
+if(count >= target){
+count = target;
+clearInterval(interval);
+}
+
+element.innerText = Math.floor(count);
+
+}, 30);
+
+}
+
+window.onload = function(){
+
+animateCounter("totalSchemes",30);
+animateCounter("ugSchemes",10);
+animateCounter("pgSchemes",5);
+animateCounter("sportsSchemes",5);
+animateCounter("girlsSchemes",5);
+animateCounter("minoritySchemes",5);
+animateCounter("casteSchemes",5);
+animateCounter("laptopSchemes",5);
+animateCounter("researchSchemes",5);
+animateCounter("pwdSchemes",3);
+
+}
+
+</script>
 
 </body>
 </html>

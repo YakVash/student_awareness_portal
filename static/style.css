@@ -11,10 +11,10 @@
    BODY
 ======================= */
 body{
-    font-family:Arial, sans-serif;
-    background:linear-gradient(to right,#003366,#0055aa);
-    color:white;
-    min-height:100vh;
+font-family:Arial, sans-serif;
+background:linear-gradient(135deg,#0b4c8c,#1565c0,#1e88e5);
+color:white;
+min-height:100vh;
 }
 
 /* =======================
@@ -48,15 +48,40 @@ body{
 /* =======================
    HERO SECTION (HOME PAGE)
 ======================= */
+/* HERO SECTION */
+
 .hero{
-    text-align:center;
-    margin-top:120px;
-    padding:20px;
+text-align:center;
+padding:140px 20px 80px 20px;
 }
 
 .hero h1{
-    font-size:42px;
-    margin-bottom:20px;
+font-size:56px;
+font-weight:bold;
+letter-spacing:2px;
+margin-bottom:20px;
+}
+
+.tagline{
+font-size:22px;
+margin-bottom:20px;
+color:#e3e3e3;
+}
+
+.hero-description{
+font-size:18px;
+max-width:800px;
+margin:auto;
+line-height:1.7;
+color:#f2f2f2;
+}
+
+.hero-buttons{
+margin-top:40px;
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
 }
 
 .hero p{
@@ -87,18 +112,39 @@ body{
     flex-wrap:wrap;
 }
 
+.features{
+display:flex;
+justify-content:center;
+gap:35px;
+margin-top:60px;
+flex-wrap:wrap;
+padding-bottom:60px;
+}
+
 .feature-card{
-    background:white;
-    color:#003366;
-    padding:25px;
-    width:250px;
-    border-radius:8px;
-    text-align:center;
-    box-shadow:0px 4px 10px rgba(0,0,0,0.2);
+background:white;
+color:#003366;
+padding:30px;
+width:280px;
+border-radius:12px;
+text-align:center;
+box-shadow:0px 8px 20px rgba(0,0,0,0.25);
+transition:all 0.25s ease;
+}
+
+.feature-card:hover{
+transform:translateY(-8px);
+box-shadow:0px 15px 35px rgba(0,0,0,0.3);
 }
 
 .feature-card h3{
-    margin-bottom:10px;
+margin-bottom:12px;
+font-size:20px;
+}
+
+.feature-card p{
+font-size:15px;
+line-height:1.6;
 }
 
 /* =======================
@@ -223,4 +269,222 @@ button:hover{
 .stat-card p{
     font-size:22px;
     font-weight:bold;
+}
+
+.total-card{
+grid-column: span 2;
+background:#003366;
+color:white;
+font-size:22px;
+}
+
+.blue{background:#e3f2fd;}
+.purple{background:#f3e5f5;}
+.teal{background:#e0f2f1;}
+.pink{background:#fce4ec;}
+.orange{background:#fff3e0;}
+.green{background:#e8f5e9;}
+.indigo{background:#e8eaf6;}
+
+.stat-card:hover{
+transform:translateY(-5px);
+box-shadow:0 8px 18px rgba(0,0,0,0.2);
+}
+
+/* Scheme Title */
+.scheme-title{
+margin-bottom:25px;
+color:#0b4c8c;
+}
+
+/* Info Sections */
+.info-card{
+background:#f9fbfd;
+padding:20px;
+border-radius:8px;
+margin-bottom:25px;
+box-shadow:0 3px 8px rgba(0,0,0,0.08);
+}
+
+/* Document Table */
+.doc-table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+}
+
+.doc-table th{
+background:#0b4c8c;
+color:white;
+padding:10px;
+text-align:left;
+}
+
+.doc-table td{
+padding:10px;
+border-bottom:1px solid #ddd;
+}
+
+.doc-table tr:hover{
+background:#f1f6fb;
+}
+
+/* Buttons */
+.action-buttons{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+margin-top:25px;
+}
+
+.primary-btn{
+background:#0b4c8c;
+}
+
+.secondary-btn{
+background:#0066cc;
+}
+
+.back-btn{
+background:#555;
+}
+
+.primary-btn:hover{
+background:#083b6a;
+}
+
+.secondary-btn:hover{
+background:#004c99;
+}
+
+.back-btn:hover{
+background:#333;
+}
+
+.primary-btn{
+background:#1e88e5;
+padding:12px 22px;
+font-size:15px;
+}
+
+.secondary-btn{
+background:#0d47a1;
+padding:12px 22px;
+font-size:15px;
+}
+
+.primary-btn:hover{
+background:#1565c0;
+}
+
+.secondary-btn:hover{
+background:#08306b;
+}
+
+.scheme-card a{
+color:#0b4c8c;
+text-decoration:none;
+font-weight:bold;
+}
+
+.scheme-card a:visited{
+color:#0b4c8c;
+}
+
+.scheme-card a:hover{
+text-decoration:underline;
+}
+
+/* Search bar */
+
+.search-bar{
+width:100%;
+padding:10px;
+margin:20px 0;
+border-radius:6px;
+border:1px solid #ccc;
+font-size:14px;
+}
+
+
+/* Filter buttons */
+
+.filter-buttons{
+display:flex;
+gap:10px;
+margin-bottom:20px;
+flex-wrap:wrap;
+}
+
+.filter-buttons button{
+padding:8px 15px;
+border:none;
+background:#0b4c8c;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+.filter-buttons button:hover{
+background:#083b6a;
+}
+
+
+/* Scheme cards */
+
+.scheme-card{
+border:1px solid #ddd;
+padding:18px;
+border-radius:8px;
+margin-bottom:15px;
+background:#f8f9fb;
+transition:0.2s;
+}
+
+.scheme-card:hover{
+background:#eef4fb;
+transform:translateY(-2px);
+}
+
+.scheme-card a{
+color:#0b4c8c;
+text-decoration:none;
+font-weight:bold;
+}
+
+.scheme-card a:visited{
+color:#0b4c8c;
+}
+
+/* Statistics Section */
+
+.stats-section{
+text-align:center;
+margin-top:60px;
+}
+
+.stats-section h2{
+margin-bottom:30px;
+}
+
+.stats-container{
+display:grid;
+grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+gap:25px;
+max-width:900px;
+margin:auto;
+}
+
+.stat-box{
+background:white;
+color:#003366;
+padding:25px;
+width:180px;
+border-radius:10px;
+box-shadow:0px 5px 15px rgba(0,0,0,0.2);
+}
+
+.stat-box h3{
+font-size:36px;
+margin-bottom:5px;
 }
