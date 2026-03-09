@@ -80,12 +80,15 @@
     {% for scheme in schemes %}
         <div class="scheme-card">
             <strong>{{ scheme.scheme_name }}</strong>
-            <br>
-            Income Limit: {{ scheme.max_income }}
-            <br><br>
+
+            <p>Education Level: {{ scheme.education_level }}</p>
+            <p>Income Limit: ₹{{ scheme.max_income }}</p>
+            <p>Category: {{ scheme.category }}</p>
+
             <a href="/edit-scheme/{{ scheme.id }}">
                 <button>Edit</button>
             </a>
+
             <a href="/delete-scheme/{{ scheme.id }}">
                 <button>Delete</button>
             </a>
