@@ -1,74 +1,83 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>{% block title %}EDUSCHEME{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<title>{% block title %}{% endblock %}</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
+
 <body>
 
 <nav class="navbar">
-    <div class="logo">
-        <a href="/" style="text-decoration:none; color:white;">EDUSCHEME</a>
-    </div>
-    <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="/schemes">All Schemes</a>
-        <a href="/check-form">Check Eligibility</a>
-    </div>
-</nav>
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <div style="text-align:center; margin-top:15px;">
-      {% for message in messages %}
-        <p style="color:red; font-weight:bold;">{{ message }}</p>
-      {% endfor %}
-    </div>
-  {% endif %}
-{% endwith %}
+<div class="logo">
+EDUSCHEME
+</div>
+
+<div class="nav-links">
+
+<a href="/">Home</a>
+
+<a href="/schemes">All Schemes</a>
+
+<a href="/check-form">Check Eligibility</a>
+
+<a href="#about">About</a>
+
+<a href="#contact">Contact</a>
+
+</div>
+
+</nav>
 
 {% block content %}
 {% endblock %}
 
+<footer class="footer">
+
+<p>EDUSCHEME Portal</p>
+
+<p>
+Helping students discover government scholarships and welfare schemes.
+</p>
+
+<p>
+© 2026 EDUSCHEME | Academic Project
+</p>
+
+</footer>
+
 <script>
 
-function animateCounter(id, target){
+const counters = document.querySelectorAll('.counter');
 
-let element = document.getElementById(id);
+counters.forEach(counter => {
+
+const target = +counter.innerText;
+
 let count = 0;
-let speed = target / 50;
 
-let interval = setInterval(function(){
+const update = () => {
 
-count += speed;
+count += Math.ceil(target / 40);
 
-if(count >= target){
-count = target;
-clearInterval(interval);
+if(count < target){
+counter.innerText = count;
+setTimeout(update,30);
+}else{
+counter.innerText = target;
 }
-
-element.innerText = Math.floor(count);
-
-}, 30);
 
 }
 
-window.onload = function(){
+update();
 
-animateCounter("totalSchemes",30);
-animateCounter("ugSchemes",10);
-animateCounter("pgSchemes",5);
-animateCounter("sportsSchemes",5);
-animateCounter("girlsSchemes",5);
-animateCounter("minoritySchemes",5);
-animateCounter("casteSchemes",5);
-animateCounter("laptopSchemes",5);
-animateCounter("researchSchemes",5);
-animateCounter("pwdSchemes",3);
-
-}
+});
 
 </script>
 
 </body>
+
 </html>

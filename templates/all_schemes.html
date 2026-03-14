@@ -8,27 +8,110 @@
 
 <h2>Available Government Schemes</h2>
 
-<p style="margin-bottom:20px;">
+<p class="page-description">
 Browse all scholarships and welfare schemes available in the portal.
-Click on a scheme to view details and application information.
 </p>
+
+
+<!-- SEARCH BAR -->
+
+<input type="text" id="schemeSearch" placeholder="Search scheme name..." class="search-bar">
+
+
+<!-- CATEGORY FILTER -->
+
+<div class="filter-buttons">
+
+<button onclick="filterSchemes('all')">All</button>
+<button onclick="filterSchemes('UG')">UG</button>
+<button onclick="filterSchemes('PG')">PG</button>
+<button onclick="filterSchemes('Sports')">Sports</button>
+<button onclick="filterSchemes('Girls')">Girls</button>
+
+</div>
+
+
+<div id="schemeList">
 
 {% for scheme in schemes %}
 
-<div class="scheme-card">
+<div class="scheme-card"
+     data-education="{{ scheme.education_level }}"
+     data-sports="{{ scheme.sports }}"
+     data-gender="{{ scheme.gender }}">
 
-    <a href="/scheme/{{ scheme.id }}">
-        <strong>{{ scheme.scheme_name }}</strong>
-    </a>
+<a href="/scheme/{{ scheme.id }}">
+<strong>{{ scheme.scheme_name }}</strong>
+</a>
 
-    <br>
-
-    Education Level: {{ scheme.education_level }}
+<p>Education Level: {{ scheme.education_level }}</p>
 
 </div>
 
 {% endfor %}
 
 </div>
+
+</div>
+
+
+<script>
+
+const searchInput = document.getElementById("schemeSearch");
+const schemes = document.querySelectorAll(".scheme-card");
+
+
+searchInput.addEventListener("keyup", function(){
+
+let filter = searchInput.value.toLowerCase();
+
+schemes.forEach(function(card){
+
+let text = card.innerText.toLowerCase();
+
+card.style.display = text.includes(filter) ? "block" : "none";
+
+});
+
+});
+
+
+function filterSchemes(type){
+
+schemes.forEach(function(card){
+
+let education = card.dataset.education;
+let sports = card.dataset.sports;
+let gender = card.dataset.gender;
+
+if(type === "all"){
+card.style.display = "block";
+}
+
+else if(type === "UG" && education === "UG"){
+card.style.display = "block";
+}
+
+else if(type === "PG" && education === "PG"){
+card.style.display = "block";
+}
+
+else if(type === "Sports" && sports === "Yes"){
+card.style.display = "block";
+}
+
+else if(type === "Girls" && gender === "Female"){
+card.style.display = "block";
+}
+
+else{
+card.style.display = "none";
+}
+
+});
+
+}
+
+</script>
 
 {% endblock %}
