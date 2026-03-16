@@ -173,9 +173,24 @@ background:#0d2a56;
 ======================= */
 /* HERO SECTION */
 
-.hero{
-text-align:center;
-padding:140px 20px 80px 20px;
+.hero {
+    position: relative;
+    background-image: url("/static/images/graduate.jpg");
+    background-size: cover;
+    background-position: center;
+    padding: 120px 20px;
+    text-align: center;
+    color: white;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:rgba(0,0,0,0.5);
 }
 
 .hero h1{
@@ -183,6 +198,13 @@ font-size:56px;
 font-weight:bold;
 letter-spacing:2px;
 margin-bottom:20px;
+position:relative;
+z-index:1;
+}
+
+.hero * {
+    position: relative;
+    z-index: 2;
 }
 
 .tagline{
@@ -207,11 +229,19 @@ gap:20px;
 flex-wrap:wrap;
 }
 
+.hero-buttons button {
+    padding: 12px 24px;
+    font-size: 15px;
+    border-radius: 6px;
+}
+
 .hero p{
     font-size:18px;
     max-width:750px;
     margin:auto;
     line-height:1.6;
+    position:relative;
+    z-index:1;
 }
 
 .hero-buttons{
@@ -671,8 +701,9 @@ margin-top:25px;
 }
 
 .search-box input{
-padding:12px;
-width:320px;
+width:380px;
+padding:14px;
+font-size:15px;
 border-radius:6px;
 border:none;
 }
