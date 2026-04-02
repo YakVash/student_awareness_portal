@@ -6,111 +6,94 @@
 
 <div class="container">
 
-<h2>Available Government Schemes</h2>
+    <h2>Available Government Schemes</h2>
 
-<p class="page-description">
-Browse all scholarships and welfare schemes available in the portal.
-</p>
+    <p class="page-description">
+        Browse all scholarships and welfare schemes available in the portal.
+    </p>
 
+    <!-- Search Bar -->
+    <input type="text" id="schemeSearch" placeholder="🔍 Search scheme by name..." class="search-bar">
 
-<!-- SEARCH BAR -->
+    <!-- Category Filters -->
+    <div class="filter-buttons">
+        <button onclick="filterSchemes('all')" class="active">All</button>
+        <button onclick="filterSchemes('UG')">UG</button>
+        <button onclick="filterSchemes('PG')">PG</button>
+        <button onclick="filterSchemes('Sports')">Sports</button>
+        <button onclick="filterSchemes('Girls')">Girls</button>
+    </div>
 
-<input type="text" id="schemeSearch" placeholder="Search scheme name..." class="search-bar">
+    <!-- Scheme List -->
+    <div id="schemeList">
 
+        {% for scheme in schemes %}
+        <div class="scheme-card"
+             data-education="{{ scheme.education_level }}"
+             data-sports="{{ scheme.sports }}"
+             data-gender="{{ scheme.gender }}">
 
-<!-- CATEGORY FILTER -->
+            <a href="/scheme/{{ scheme.id }}">
+                <strong>{{ scheme.scheme_name }}</strong>
+            </a>
+            <p>Education Level: {{ scheme.education_level }}</p>
 
-<div class="filter-buttons">
+        </div>
+        {% endfor %}
 
-<button onclick="filterSchemes('all')">All</button>
-<button onclick="filterSchemes('UG')">UG</button>
-<button onclick="filterSchemes('PG')">PG</button>
-<button onclick="filterSchemes('Sports')">Sports</button>
-<button onclick="filterSchemes('Girls')">Girls</button>
-
-</div>
-
-
-<div id="schemeList">
-
-{% for scheme in schemes %}
-
-<div class="scheme-card"
-     data-education="{{ scheme.education_level }}"
-     data-sports="{{ scheme.sports }}"
-     data-gender="{{ scheme.gender }}">
-
-<a href="/scheme/{{ scheme.id }}">
-<strong>{{ scheme.scheme_name }}</strong>
-</a>
-
-<p>Education Level: {{ scheme.education_level }}</p>
+    </div>
 
 </div>
-
-{% endfor %}
-
-</div>
-
-</div>
-
 
 <script>
 
-const searchInput = document.getElementById("schemeSearch");
-const schemes = document.querySelectorAll(".scheme-card");
+    const searchInput = document.getElementById("schemeSearch");
+    const schemes = document.querySelectorAll(".scheme-card");
+    const filterBtns = document.querySelectorAll(".filter-buttons button");
 
+    // Search functionality
+    searchInput.addEventListener("keyup", function() {
+        let filter = searchInput.value.toLowerCase();
+        schemes.forEach(function(card) {
+            let text = card.innerText.toLowerCase();
+            card.style.display = text.includes(filter) ? "block" : "none";
+        });
+    });
 
-searchInput.addEventListener("keyup", function(){
+    // Filter functionality with active button state
+    function filterSchemes(type) {
 
-let filter = searchInput.value.toLowerCase();
+        // Update active button
+        filterBtns.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
 
-schemes.forEach(function(card){
+        schemes.forEach(function(card) {
 
-let text = card.innerText.toLowerCase();
+            let education = card.dataset.education;
+            let sports = card.dataset.sports;
+            let gender = card.dataset.gender;
 
-card.style.display = text.includes(filter) ? "block" : "none";
+            if (type === "all") {
+                card.style.display = "block";
+            }
+            else if (type === "UG" && education === "UG") {
+                card.style.display = "block";
+            }
+            else if (type === "PG" && education === "PG") {
+                card.style.display = "block";
+            }
+            else if (type === "Sports" && sports === "Yes") {
+                card.style.display = "block";
+            }
+            else if (type === "Girls" && gender === "Female") {
+                card.style.display = "block";
+            }
+            else {
+                card.style.display = "none";
+            }
 
-});
-
-});
-
-
-function filterSchemes(type){
-
-schemes.forEach(function(card){
-
-let education = card.dataset.education;
-let sports = card.dataset.sports;
-let gender = card.dataset.gender;
-
-if(type === "all"){
-card.style.display = "block";
-}
-
-else if(type === "UG" && education === "UG"){
-card.style.display = "block";
-}
-
-else if(type === "PG" && education === "PG"){
-card.style.display = "block";
-}
-
-else if(type === "Sports" && sports === "Yes"){
-card.style.display = "block";
-}
-
-else if(type === "Girls" && gender === "Female"){
-card.style.display = "block";
-}
-
-else{
-card.style.display = "none";
-}
-
-});
-
-}
+        });
+    }
 
 </script>
 

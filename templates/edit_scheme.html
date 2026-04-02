@@ -7,63 +7,83 @@
 <div class="container">
 
     <h2>Edit Scheme</h2>
+    <p class="page-description">Update the details for this scheme below.</p>
 
     <form method="POST" action="/update-scheme/{{ scheme.id }}">
 
-        <label>Scheme Name</label>
-        <input type="text" name="scheme_name" value="{{ scheme.scheme_name }}" required>
+        <label for="scheme_name">Scheme Name</label>
+        <input type="text" name="scheme_name" id="scheme_name" value="{{ scheme.scheme_name }}" required>
 
-        <label>Education Level</label>
-        <input type="text" name="education" value="{{ scheme.education_level }}" required>
+        <label for="education">Education Level</label>
+        <select name="education" id="education" required>
+            <option value="Primary" {% if scheme.education_level == 'Primary' %}selected{% endif %}>Primary</option>
+            <option value="Secondary" {% if scheme.education_level == 'Secondary' %}selected{% endif %}>Secondary</option>
+            <option value="Higher Secondary" {% if scheme.education_level == 'Higher Secondary' %}selected{% endif %}>Higher Secondary</option>
+            <option value="Diploma" {% if scheme.education_level == 'Diploma' %}selected{% endif %}>Diploma</option>
+            <option value="UG" {% if scheme.education_level == 'UG' %}selected{% endif %}>Undergraduate (UG)</option>
+            <option value="PG" {% if scheme.education_level == 'PG' %}selected{% endif %}>Postgraduate (PG)</option>
+            <option value="PhD" {% if scheme.education_level == 'PhD' %}selected{% endif %}>PhD</option>
+            <option value="Any" {% if scheme.education_level == 'Any' %}selected{% endif %}>Any</option>
+        </select>
 
-        <label>Max Income</label>
-        <input type="number" name="max_income" value="{{ scheme.max_income }}" required>
+        <label for="max_income">Max Income (₹)</label>
+        <input type="number" name="max_income" id="max_income" value="{{ scheme.max_income }}" required>
 
-        <label>Category</label>
-        <input type="text" name="category" value="{{ scheme.category }}" required>
+        <label for="category">Category</label>
+        <select name="category" id="category" required>
+            <option value="SC" {% if scheme.category == 'SC' %}selected{% endif %}>SC</option>
+            <option value="ST" {% if scheme.category == 'ST' %}selected{% endif %}>ST</option>
+            <option value="OBC" {% if scheme.category == 'OBC' %}selected{% endif %}>OBC</option>
+            <option value="Minority" {% if scheme.category == 'Minority' %}selected{% endif %}>Minority</option>
+            <option value="Any" {% if scheme.category == 'Any' %}selected{% endif %}>Any</option>
+        </select>
 
-        <label>Gender</label>
-        <input type="text" name="gender" value="{{ scheme.gender }}" required>
+        <label for="gender">Gender</label>
+        <select name="gender" id="gender" required>
+            <option value="Male" {% if scheme.gender == 'Male' %}selected{% endif %}>Male</option>
+            <option value="Female" {% if scheme.gender == 'Female' %}selected{% endif %}>Female</option>
+            <option value="Any" {% if scheme.gender == 'Any' %}selected{% endif %}>Any</option>
+        </select>
 
-        <label>Disability</label>
-        <select name="disability" required>
+        <label for="disability">Disability</label>
+        <select name="disability" id="disability" required>
             <option value="Yes" {% if scheme.disability == 'Yes' %}selected{% endif %}>Yes</option>
             <option value="No" {% if scheme.disability == 'No' %}selected{% endif %}>No</option>
             <option value="Any" {% if scheme.disability == 'Any' %}selected{% endif %}>Any</option>
         </select>
 
-        <label>First Graduate</label>
-        <select name="first_graduate" required>
+        <label for="first_graduate">First Graduate</label>
+        <select name="first_graduate" id="first_graduate" required>
             <option value="Yes" {% if scheme.first_graduate == 'Yes' %}selected{% endif %}>Yes</option>
             <option value="No" {% if scheme.first_graduate == 'No' %}selected{% endif %}>No</option>
             <option value="Any" {% if scheme.first_graduate == 'Any' %}selected{% endif %}>Any</option>
         </select>
 
-        <label>Official Website Link</label>
-        <input type="text" name="official_link" value="{{ scheme.official_link }}" required>
+        <label for="min_age">Minimum Age</label>
+        <input type="number" name="min_age" id="min_age" value="{{ scheme.min_age }}" required>
 
-        <label>Minimum Age</label>
-        <input type="number" name="min_age" value="{{ scheme.min_age }}" required>
+        <label for="max_age">Maximum Age</label>
+        <input type="number" name="max_age" id="max_age" value="{{ scheme.max_age }}" required>
 
-        <label>Maximum Age</label>
-        <input type="number" name="max_age" value="{{ scheme.max_age }}" required>
+        <label for="benefits">Benefits</label>
+        <input type="text" name="benefits" id="benefits" value="{{ scheme.benefits }}" required>
 
-        <label>Benefits</label>
-        <input type="text" name="benefits" value="{{ scheme.benefits }}" required>
+        <label for="documents">Documents (comma separated)</label>
+        <input type="text" name="documents" id="documents" value="{{ scheme.documents }}" required>
 
-        <label>Documents</label>
-        <input type="text" name="documents" value="{{ scheme.documents }}" required>
+        <label for="official_link">Official Website Link</label>
+        <input type="text" name="official_link" id="official_link" value="{{ scheme.official_link }}" required>
 
-        <label>YouTube Tutorial Link</label>
-        <input type="text" name="youtube_link" value="{{ scheme.youtube_link }}" required>
+        <label for="youtube_link">YouTube Tutorial Link</label>
+        <input type="text" name="youtube_link" id="youtube_link" value="{{ scheme.youtube_link }}" required>
 
-        <button type="submit">Update Scheme</button>
+        <button type="submit" class="primary-btn">💾 Update Scheme</button>
 
     </form>
 
     <br>
     <a href="/admin-dashboard">
-        <button>Back</button>
+        <button class="back-btn">⬅ Back to Dashboard</button>
     </a>
 
 </div>

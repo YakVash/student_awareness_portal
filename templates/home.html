@@ -4,211 +4,201 @@
 
 {% block content %}
 
+<!-- Hero Section -->
 <section class="hero">
 
-<h1>Discover Government Scholarships Easily</h1>
+    <h1>Discover Government Scholarships Easily</h1>
 
-<p>
-Find scholarships, fellowships and welfare schemes
-based on your eligibility.
-</p>
+    <p>
+        Find scholarships, fellowships and welfare schemes
+        based on your eligibility — all in one place.
+    </p>
 
-<div class="hero-buttons">
-
-<a href="/check-form">
-<button>Check Eligibility</button>
-</a>
-
-<a href="/schemes">
-<button>Browse All Schemes</button>
-</a>
-
-</div>
+    <div class="hero-buttons">
+        <a href="/check-form">
+            <button>Check Eligibility</button>
+        </a>
+        <a href="/schemes">
+            <button>Browse All Schemes</button>
+        </a>
+    </div>
 
 </section>
 
-<section class="search-section">
-<h2>Find Scholarships Instantly</h2>
-<p>Search for scholarships, fellowships, and government schemes.</p>
+<!-- Search Section -->
+<section class="search-section reveal">
 
-<form action="/search" method="GET">
-<input type="text" name="query" placeholder="Search scholarships (sports, laptop, minority...)">
-<button type="submit">Search</button>
-</form>
-</section>
+    <h2>Find Scholarships Instantly</h2>
+    <p>Search for scholarships, fellowships, and government schemes.</p>
 
-<section class="featured-schemes">
-
-<h2>Featured Scholarships</h2>
-
-<div class="featured-grid">
-
-{% for scheme in featured_schemes %}
-
-<div class="featured-card">
-
-<h3>{{ scheme.scheme_name }}</h3>
-
-<p>Education Level: {{ scheme.education_level }}</p>
-
-<a href="/scheme/{{ scheme.id }}">
-<button>View Details</button>
-</a>
-
-</div>
-
-{% endfor %}
-
-</div>
+    <form action="/search" method="GET">
+        <input type="text" name="query" placeholder="Search scholarships (sports, laptop, minority...)">
+        <button type="submit">Search</button>
+    </form>
 
 </section>
 
-<section class="stats">
+<!-- Featured Schemes -->
+<section class="featured-schemes reveal">
 
-<h2>Portal Statistics</h2>
+    <h2>Featured Scholarships</h2>
 
-<div class="stats-grid">
+    <div class="featured-grid">
 
-<div class="stat-card">
-<h3 class="counter">{{ total_schemes }}</h3>
-<p>Total Schemes</p>
-</div>
+        {% for scheme in featured_schemes %}
+        <div class="featured-card">
+            <h3>{{ scheme.scheme_name }}</h3>
+            <p>Education Level: {{ scheme.education_level }}</p>
+            <a href="/scheme/{{ scheme.id }}">
+                <button>View Details</button>
+            </a>
+        </div>
+        {% endfor %}
 
-<div class="stat-card">
-<h3 class="counter">{{ ug_count }}</h3>
-<p>UG Scholarships</p>
-</div>
-
-<div class="stat-card">
-<h3 class="counter">{{ pg_count }}</h3>
-<p>PG Scholarships</p>
-</div>
-
-<div class="stat-card">
-<h3 class="counter">{{ sports_count }}</h3>
-<p>Sports Schemes</p>
-</div>
-
-<div class="stat-card">
-<h3 class="counter">{{ pwd_count }}</h3>
-<p>PWD Support</p>
-</div>
-
-<div class="stat-card">
-<h3 class="counter">{{ minority_count }}</h3>
-<p>Minority Schemes</p>
-</div>
-
-<div class="stat-card">
-<h3 class="counter">{{ women_count }}</h3>
-<p>Women Scholarships</p>
-</div>
-
-</div>
+    </div>
 
 </section>
 
+<!-- Statistics Section -->
+<section class="stats reveal">
 
+    <h2>Portal Statistics</h2>
 
-<section class="opportunities">
+    <div class="stats-grid">
 
-<h2>Explore Opportunities</h2>
+        <div class="stat-card">
+            <h3 class="counter">{{ total_schemes }}</h3>
+            <p>Total Schemes</p>
+        </div>
 
-<div class="opportunity-grid">
+        <div class="stat-card">
+            <h3 class="counter">{{ ug_count }}</h3>
+            <p>UG Scholarships</p>
+        </div>
 
-<div class="opportunity-card">
-<h3>🎓 Scholarships</h3>
-<p>UG, PG and research scholarships for students.</p>
-</div>
+        <div class="stat-card">
+            <h3 class="counter">{{ pg_count }}</h3>
+            <p>PG Scholarships</p>
+        </div>
 
-<div class="opportunity-card">
-<h3>🏅 Sports Schemes</h3>
-<p>Athlete development and sports scholarship programs.</p>
-</div>
+        <div class="stat-card">
+            <h3 class="counter">{{ sports_count }}</h3>
+            <p>Sports Schemes</p>
+        </div>
 
-<div class="opportunity-card">
-<h3>♿ PWD Support</h3>
-<p>Education and welfare schemes for persons with disabilities.</p>
-</div>
+        <div class="stat-card">
+            <h3 class="counter">{{ pwd_count }}</h3>
+            <p>PWD Support</p>
+        </div>
 
-<div class="opportunity-card">
-<h3>💻 Digital Schemes</h3>
-<p>Laptop and digital access programs for students.</p>
-</div>
+        <div class="stat-card">
+            <h3 class="counter">{{ minority_count }}</h3>
+            <p>Minority Schemes</p>
+        </div>
 
-<div class="opportunity-card">
-<h3>👩 Women Scholarships</h3>
-<p>Empowering girls through education and training support.</p>
-</div>
+        <div class="stat-card">
+            <h3 class="counter">{{ women_count }}</h3>
+            <p>Women Scholarships</p>
+        </div>
 
-<div class="opportunity-card">
-<h3>🌍 Minority Schemes</h3>
-<p>Scholarships supporting minority community students.</p>
-</div>
-
-<div class="opportunity-card">
-<h3>🏛 Caste Based Schemes</h3>
-<p>Support programs for SC, ST and OBC students.</p>
-</div>
-
-<div class="opportunity-card">
-<h3>🔬 Research Fellowships</h3>
-<p>Research funding for postgraduate and PhD scholars.</p>
-</div>
-
-</div>
+    </div>
 
 </section>
 
-<section id="about" class="about-section">
+<!-- Explore Opportunities -->
+<section class="opportunities reveal">
 
-<h2>About EDUSCHEME</h2>
+    <h2>Explore Opportunities</h2>
 
-<p>
-EDUSCHEME is a scholarship discovery platform designed
-to help students easily find government scholarships,
-fellowships, and welfare schemes. Many students miss
-valuable opportunities simply because they are unaware
-of them. This portal helps students explore schemes
-based on education level, income category, gender,
-disability status and more.
-</p>
+    <div class="opportunity-grid">
 
-<div class="vision-box">
+        <div class="opportunity-card">
+            <h3>🎓 Scholarships</h3>
+            <p>UG, PG and research scholarships for students.</p>
+        </div>
 
-<h3>Our Vision</h3>
+        <div class="opportunity-card">
+            <h3>🏅 Sports Schemes</h3>
+            <p>Athlete development and sports scholarship programs.</p>
+        </div>
 
-<p>
-Our vision is to create a centralized digital platform
-where students across the country can quickly discover
-and access government scholarships and welfare schemes
-without navigating multiple complicated portals.
-</p>
+        <div class="opportunity-card">
+            <h3>♿ PWD Support</h3>
+            <p>Education and welfare schemes for persons with disabilities.</p>
+        </div>
 
-</div>
+        <div class="opportunity-card">
+            <h3>💻 Digital Schemes</h3>
+            <p>Laptop and digital access programs for students.</p>
+        </div>
+
+        <div class="opportunity-card">
+            <h3>👩 Women Scholarships</h3>
+            <p>Empowering girls through education and training support.</p>
+        </div>
+
+        <div class="opportunity-card">
+            <h3>🌍 Minority Schemes</h3>
+            <p>Scholarships supporting minority community students.</p>
+        </div>
+
+        <div class="opportunity-card">
+            <h3>🏛 Caste Based Schemes</h3>
+            <p>Support programs for SC, ST and OBC students.</p>
+        </div>
+
+        <div class="opportunity-card">
+            <h3>🔬 Research Fellowships</h3>
+            <p>Research funding for postgraduate and PhD scholars.</p>
+        </div>
+
+    </div>
 
 </section>
 
-<section id="contact" class="contact-section">
+<!-- About Section -->
+<section id="about" class="about-section reveal">
 
-<h2>Contact</h2>
+    <h2>About EDUSCHEME</h2>
 
-<p>
-For questions or feedback regarding the EDUSCHEME portal,
-please contact the project team.
-</p>
+    <p>
+        EDUSCHEME is a scholarship discovery platform designed
+        to help students easily find government scholarships,
+        fellowships, and welfare schemes. Many students miss
+        valuable opportunities simply because they are unaware
+        of them. This portal helps students explore schemes
+        based on education level, income category, gender,
+        disability status and more.
+    </p>
 
-<div class="contact-box">
-
-<p><strong>Email:</strong> eduscheme.portal@gmail.com</p>
-
-<p><strong>Phone:</strong> +91 9876543210</p>
-
-<p><strong>Address:</strong> Student Project Portal</p>
-
-</div>
+    <div class="vision-box">
+        <h3>Our Vision</h3>
+        <p>
+            Our vision is to create a centralized digital platform
+            where students across the country can quickly discover
+            and access government scholarships and welfare schemes
+            without navigating multiple complicated portals.
+        </p>
+    </div>
 
 </section>
 
+<!-- Contact Section -->
+<section id="contact" class="contact-section reveal">
+
+    <h2>Contact</h2>
+
+    <p>
+        For questions or feedback regarding the EDUSCHEME portal,
+        please contact the project team.
+    </p>
+
+    <div class="contact-box">
+        <p><strong>Email:</strong> eduscheme.portal@gmail.com</p>
+        <p><strong>Phone:</strong> +91 9876543210</p>
+        <p><strong>Address:</strong> Student Project Portal</p>
+    </div>
+
+</section>
 
 {% endblock %}

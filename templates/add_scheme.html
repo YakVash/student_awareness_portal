@@ -7,14 +7,15 @@
 <div class="container">
 
     <h2>Add New Scheme</h2>
+    <p class="page-description">Fill in the details below to add a new government scheme to the portal.</p>
 
     <form method="POST" action="/save-scheme">
 
-        <label>Scheme Name</label>
-        <input type="text" name="scheme_name" required>
+        <label for="scheme_name">Scheme Name</label>
+        <input type="text" name="scheme_name" id="scheme_name" placeholder="Enter scheme name" required>
 
-        <label>Education Level</label>
-        <select name="education" required>
+        <label for="education">Education Level</label>
+        <select name="education" id="education" required>
             <option value="">Select</option>
             <option value="Primary">Primary</option>
             <option value="Secondary">Secondary</option>
@@ -25,11 +26,11 @@
             <option value="PhD">PhD</option>
         </select>
 
-        <label>Max Income</label>
-        <input type="number" name="max_income" required>
+        <label for="max_income">Max Income (₹)</label>
+        <input type="number" name="max_income" id="max_income" placeholder="e.g. 250000" required>
 
-        <label>Category</label>
-        <select name="category" required>
+        <label for="category">Category</label>
+        <select name="category" id="category" required>
             <option value="">Select</option>
             <option value="SC">SC</option>
             <option value="ST">ST</option>
@@ -38,52 +39,56 @@
             <option value="Any">Any</option>
         </select>
 
-        <label>Gender</label>
-        <select name="gender" required>
+        <label for="gender">Gender</label>
+        <select name="gender" id="gender" required>
             <option value="">Select</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Any">Any</option>
         </select>
 
-        <label>Disability Applicable</label>
-        <select name="disability" required>
+        <label for="disability">Disability Applicable</label>
+        <select name="disability" id="disability" required>
             <option value="">Select</option>
             <option value="Yes">Only for PWD</option>
             <option value="No">Not Disability Specific</option>
             <option value="Any">Applicable to All</option>
         </select>
 
-        <label>Frist Graduate Eligibility</label>
-        <select name="first_graduate" required>
+        <label for="first_graduate">First Graduate Eligibility</label>
+        <select name="first_graduate" id="first_graduate" required>
             <option value="">Select</option>
             <option value="Yes">Required</option>
             <option value="No">Not Required</option>
             <option value="Any">Applicable to All</option>
         </select>
-        
-        <label>Minimum Age</label>
-        <input type="number" name="min_age" required>
 
-        <label>Maximum Age</label>
-        <input type="number" name="max_age" required>
+        <label for="min_age">Minimum Age</label>
+        <input type="number" name="min_age" id="min_age" placeholder="e.g. 17" required>
 
-        <label>Benefits</label>
-        <input type="text" name="benefits" required>
+        <label for="max_age">Maximum Age</label>
+        <input type="number" name="max_age" id="max_age" placeholder="e.g. 25" required>
 
-        <label>Documents</label>
-        <input type="text" name="documents" required>
+        <label for="benefits">Benefits</label>
+        <input type="text" name="benefits" id="benefits" placeholder="e.g. Full tuition fee waiver" required>
 
+        <label for="documents">Documents (comma separated)</label>
+        <input type="text" name="documents" id="documents" placeholder="e.g. Income Certificate, Aadhaar" required>
 
-        <label>Official Website Link</label>
-        <input type="text" name="official_link" required>
+        <label for="official_link">Official Website Link</label>
+        <input type="text" name="official_link" id="official_link" placeholder="https://..." required>
 
-        <label>YouTube Tutorial Link</label>
-        <input type="text" name="youtube_link" required>
+        <label for="youtube_link">YouTube Tutorial Link</label>
+        <input type="text" name="youtube_link" id="youtube_link" placeholder="https://youtube.com/..." required>
 
-        <button type="submit">Add Scheme</button>
+        <button type="submit" class="success-btn">➕ Add Scheme</button>
 
     </form>
+
+    <br>
+    <a href="/admin-dashboard">
+        <button class="back-btn">⬅ Back to Dashboard</button>
+    </a>
 
 </div>
 

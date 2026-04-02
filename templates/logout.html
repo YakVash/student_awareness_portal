@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+
+<div class="logout-container">
+
+    <span class="logout-icon">👋</span>
+
+    <h2>You've Been Logged Out</h2>
+
+    <p>
+        Thank you for using the EDUSCHEME Admin Panel.
+        Your session has been ended securely.
+    </p>
+
+    <div class="logout-buttons">
+        <a href="/">
+            <button class="primary-btn">🏠 Go to Home</button>
+        </a>
+        <a href="/admin">
+            <button class="secondary-btn">🔐 Login Again</button>
+        </a>
+    </div>
+
+</div>
+
+<script>
+    // Auto-redirect to home after 10 seconds
+    setTimeout(function() {
+        window.location.href = "/";
+    }, 10000);
+</script>
+
+{% endblock %}

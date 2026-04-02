@@ -7,97 +7,97 @@
 <div class="container">
 
     <h2>Admin Dashboard</h2>
+    <p class="page-description">Manage schemes, view statistics, and add new entries.</p>
 
     <h3>📊 Scheme Statistics</h3>
 
     <div class="stats-grid">
 
-    <a href="/admin-dashboard?filter=all" class="stat-card blue">
-    <h4>📚 Total Schemes</h4>
-    <p>{{ total_schemes }}</p>
-    </a>
+        <a href="/admin-dashboard" class="stat-card blue">
+            <h4>📚 Total Schemes</h4>
+            <p>{{ total_schemes }}</p>
+        </a>
 
-    <a href="/admin-dashboard?filter=UG" class="stat-card blue">
-    <h4>🎓 UG Schemes</h4>
-    <p>{{ ug_count }}</p>
-    </a>
+        <a href="/admin-dashboard?filter=UG" class="stat-card blue">
+            <h4>🎓 UG Schemes</h4>
+            <p>{{ ug_count }}</p>
+        </a>
 
-    <a href="/admin-dashboard?filter=PG" class="stat-card blue">
-    <h4>🎓 PG Schemes</h4>
-    <p>{{ pg_count }}</p>
-    </a>
+        <a href="/admin-dashboard?filter=PG" class="stat-card blue">
+            <h4>🎓 PG Schemes</h4>
+            <p>{{ pg_count }}</p>
+        </a>
 
-    <a href="/admin-dashboard?filter=PWD" class="stat-card purple">
-    <h4>♿ PWD Schemes</h4>
-    <p>{{ pwd_count }}</p>
-    </a>
+        <a href="/admin-dashboard?filter=PWD" class="stat-card purple">
+            <h4>♿ PWD Schemes</h4>
+            <p>{{ pwd_count }}</p>
+        </a>
 
-    <a href="/admin-dashboard?filter=Sports" class="stat-card green">
-    <h4>🏅 Sports Schemes</h4>
-    <p>{{ sports_count }}</p>
-    </a>
+        <a href="/admin-dashboard?filter=Sports" class="stat-card green">
+            <h4>🏅 Sports Schemes</h4>
+            <p>{{ sports_count }}</p>
+        </a>
 
-    <a href="/admin-dashboard?filter=Caste" class="stat-card orange">
-    <h4>🏛 Caste Schemes</h4>
-    <p>{{ caste_count }}</p>
-    </a>
+        <a href="/admin-dashboard?filter=Caste" class="stat-card orange">
+            <h4>🏛 Caste Schemes</h4>
+            <p>{{ caste_count }}</p>
+        </a>
 
-    <a href="/admin-dashboard?filter=Minority" class="stat-card teal">
-    <h4>🌍 Minority Schemes</h4>
-    <p>{{ minority_count }}</p>
-    </a>
+        <a href="/admin-dashboard?filter=Minority" class="stat-card teal">
+            <h4>🌍 Minority Schemes</h4>
+            <p>{{ minority_count }}</p>
+        </a>
 
-    <a href="/admin-dashboard?filter=Women" class="stat-card pink">
-    <h4>👩 Women / Girls</h4>
-    <p>{{ women_count }}</p>
-    </a>
+        <a href="/admin-dashboard?filter=Women" class="stat-card pink">
+            <h4>👩 Women / Girls</h4>
+            <p>{{ women_count }}</p>
+        </a>
 
-    <a href="/admin-dashboard?filter=Laptop" class="stat-card indigo">
-    <h4>💻 Laptop Schemes</h4>
-    <p>{{ laptop_count }}</p>
-    </a>
+        <a href="/admin-dashboard?filter=Laptop" class="stat-card indigo">
+            <h4>💻 Laptop Schemes</h4>
+            <p>{{ laptop_count }}</p>
+        </a>
 
-    <a href="/admin-dashboard?filter=Research" class="stat-card dark">
-    <h4>🔬 Research Schemes</h4>
-    <p>{{ research_count }}</p>
-    </a>
+        <a href="/admin-dashboard?filter=Research" class="stat-card dark">
+            <h4>🔬 Research Schemes</h4>
+            <p>{{ research_count }}</p>
+        </a>
 
     </div>
 
-    <form method="GET" action="/admin-dashboard">
-        <input type="text" name="search" placeholder="Search Scheme Name">
-        <button type="submit">Search</button>
-    </form>
-
     <br>
 
+    <!-- Search + Add Scheme Actions -->
+    <form method="GET" action="/admin-dashboard" style="flex-direction: row; gap: 10px; align-items: center;">
+        <input type="text" name="search" placeholder="🔍 Search scheme name..." style="flex: 1;">
+        <button type="submit" style="margin-top: 0;">Search</button>
+    </form>
+
     <a href="/add-scheme">
-        <button>Add New Scheme</button>
+        <button class="success-btn">➕ Add New Scheme</button>
     </a>
 
-    <h3 style="margin-top:20px;">Existing Schemes</h3>
+    <h3 style="margin-top: 30px;">Existing Schemes</h3>
 
     {% for scheme in schemes %}
         <div class="scheme-card">
             <strong>{{ scheme.scheme_name }}</strong>
-
-            <p>Education Level: {{ scheme.education_level }}</p>
-            <p>Income Limit: ₹{{ scheme.max_income }}</p>
-            <p>Category: {{ scheme.category }}</p>
+            <p>Education Level: {{ scheme.education_level }} &middot; Income Limit: ₹{{ scheme.max_income }} &middot; Category: {{ scheme.category }}</p>
 
             <a href="/edit-scheme/{{ scheme.id }}">
-                <button>Edit</button>
+                <button class="primary-btn" style="font-size: 12px; padding: 6px 16px;">✏ Edit</button>
             </a>
 
-            <a href="/delete-scheme/{{ scheme.id }}">
-                <button>Delete</button>
+            <a href="/delete-scheme/{{ scheme.id }}" onclick="return confirm('Are you sure you want to delete this scheme?')">
+                <button class="danger-btn" style="font-size: 12px; padding: 6px 16px;">🗑 Delete</button>
             </a>
         </div>
     {% endfor %}
 
     <br>
+
     <a href="/logout">
-        <button>Logout</button>
+        <button class="back-btn">🚪 Logout</button>
     </a>
 
 </div>

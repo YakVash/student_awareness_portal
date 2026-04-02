@@ -12,6 +12,7 @@ db = mysql.connector.connect(
     database="schemes_db"
 )
 
+
 # HOME PAGE
 @app.route('/')
 def landing():
@@ -46,6 +47,9 @@ def landing():
     cursor.execute("SELECT COUNT(*) as women FROM schemes WHERE gender='Female'")
     women_count = cursor.fetchone()['women']
 
+    cursor.execute("SELECT * FROM schemes ORDER BY id DESC LIMIT 4")
+    featured_schemes = cursor.fetchall()
+
     return render_template(
         "home.html",
         total_schemes=total_schemes,
@@ -54,8 +58,29 @@ def landing():
         sports_count=sports_count,
         pwd_count=pwd_count,
         minority_count=minority_count,
-        women_count=women_count
+        women_count=women_count,
+        featured_schemes=featured_schemes
     )
+
+
+# SEARCH ROUTE (used by homepage search form)
+@app.route('/search')
+def search():
+
+    query = request.args.get('query', '')
+
+    cursor = db.cursor(dictionary=True)
+
+    if query:
+        search_query = "SELECT * FROM schemes WHERE scheme_name LIKE %s OR benefits LIKE %s OR category LIKE %s"
+        search_term = '%' + query + '%'
+        cursor.execute(search_query, (search_term, search_term, search_term))
+    else:
+        cursor.execute("SELECT * FROM schemes ORDER BY scheme_name")
+
+    schemes = cursor.fetchall()
+
+    return render_template("all_schemes.html", schemes=schemes)
 
 
 # ELIGIBILITY FORM
@@ -77,11 +102,11 @@ def check():
     age = int(request.form['age'])
 
     if age < 5:
-        flash("Invalid Age Entered")
+        flash("Invalid Age Entered", "error")
         return redirect(url_for('form'))
 
     if income < 0:
-        flash("Income Cannot Be Negative")
+        flash("Income Cannot Be Negative", "error")
         return redirect(url_for('form'))
 
     cursor = db.cursor(dictionary=True)
@@ -119,9 +144,11 @@ def admin_login():
 
     if username == "admin" and password == "admin123":
         session['admin_logged_in'] = True
+        flash("Welcome back, Admin!", "success")
         return redirect(url_for('admin_dashboard'))
     else:
-        return "Invalid Credentials"
+        flash("Invalid Credentials. Please try again.", "error")
+        return redirect(url_for('admin'))
 
 
 # ADMIN DASHBOARD
@@ -167,7 +194,7 @@ def admin_dashboard():
 
     schemes = cursor.fetchall()
 
-    # 📊 DASHBOARD STATISTICS
+    # DASHBOARD STATISTICS
 
     cursor.execute("SELECT COUNT(*) as total FROM schemes")
     total_schemes = cursor.fetchone()['total']
@@ -219,7 +246,7 @@ def admin_dashboard():
 @app.route('/logout')
 def logout():
     session.pop('admin_logged_in', None)
-    return redirect(url_for('admin'))
+    return render_template("logout.html")
 
 
 # VIEW ALL SCHEMES
@@ -273,6 +300,7 @@ def delete_scheme(id):
     cursor.execute("DELETE FROM schemes WHERE id=%s", (id,))
     db.commit()
 
+    flash("Scheme deleted successfully.", "info")
     return redirect(url_for('admin_dashboard'))
 
 
@@ -342,6 +370,7 @@ def update_scheme(id):
 
     db.commit()
 
+    flash("Scheme updated successfully!", "success")
     return redirect(url_for('admin_dashboard'))
 
 
@@ -387,6 +416,7 @@ def save_scheme():
 
     db.commit()
 
+    flash("New scheme added successfully!", "success")
     return redirect(url_for('admin_dashboard'))
 
 

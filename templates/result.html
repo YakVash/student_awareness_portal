@@ -9,22 +9,38 @@
     <h2>Eligible Schemes</h2>
 
     {% if schemes %}
+
+        <div class="result-count">
+            Found <strong>{{ schemes|length }}</strong> scheme{{ 's' if schemes|length != 1 else '' }} matching your criteria
+        </div>
+
         {% for scheme in schemes %}
             <div class="scheme-card">
                 <a href="/scheme/{{ scheme.id }}">
                     <strong>{{ scheme.scheme_name }}</strong>
                 </a>
+                <p>Education Level: {{ scheme.education_level }} &middot; Max Income: ₹{{ scheme.max_income }}</p>
             </div>
         {% endfor %}
+
     {% else %}
-        <p style="color:red; font-weight:bold;">
-            No eligible schemes found for your criteria.
-        </p>
+
+        <div class="no-results">
+            <span class="no-results-icon">🔍</span>
+            <p>No eligible schemes found for your criteria.</p>
+            <p class="no-results-hint">Try adjusting your education level, income, or category to see more results.</p>
+        </div>
+
     {% endif %}
 
-    <a href="/check-form">
-        <button>Check Again</button>
-    </a>
+    <div class="action-buttons">
+        <a href="/check-form">
+            <button class="primary-btn">⬅ Check Again</button>
+        </a>
+        <a href="/schemes">
+            <button class="secondary-btn">Browse All Schemes</button>
+        </a>
+    </div>
 
 </div>
 

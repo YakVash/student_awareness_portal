@@ -1,82 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-<title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EDUSCHEME - Discover government scholarships, fellowships and welfare schemes for students based on eligibility.">
+    <meta name="keywords" content="scholarships, government schemes, student welfare, education, fellowships, India">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}EDUSCHEME{% endblock %} | EDUSCHEME Portal</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-<nav class="navbar">
+    <nav class="navbar">
 
-<div class="logo">
-EDUSCHEME
-</div>
+        <div class="logo">EDUSCHEME</div>
 
-<div class="nav-links">
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
 
-<a href="/">Home</a>
+        <div class="nav-links" id="navLinks">
+            <a href="/">Home</a>
+            <a href="/schemes">All Schemes</a>
+            <a href="/check-form">Check Eligibility</a>
+            <a href="/#about">About</a>
+            <a href="/#contact">Contact</a>
+        </div>
 
-<a href="/schemes">All Schemes</a>
+    </nav>
 
-<a href="/check-form">Check Eligibility</a>
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-msg {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
 
-<a href="#about">About</a>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 
-<a href="#contact">Contact</a>
+    <footer class="footer">
+        <p>EDUSCHEME</p>
+        <p>Helping students discover government scholarships and welfare schemes.</p>
+        <p>&copy; 2026 EDUSCHEME | Academic Project</p>
+    </footer>
 
-</div>
+    <script>
+        // Mobile hamburger toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+            document.getElementById('hamburger').classList.toggle('active');
+        }
 
-</nav>
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+                document.getElementById('hamburger').classList.remove('active');
+            });
+        });
 
-{% block content %}
-{% endblock %}
+        // Animated counters with Intersection Observer
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.innerText);
+                    let count = 0;
+                    const duration = 1500;
+                    const step = Math.max(1, Math.ceil(target / (duration / 30)));
 
-<footer class="footer">
+                    const update = () => {
+                        count += step;
+                        if (count < target) {
+                            counter.innerText = count;
+                            requestAnimationFrame(update);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    update();
+                    counterObserver.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.3 });
 
-<p>EDUSCHEME Portal</p>
+        document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
-<p>
-Helping students discover government scholarships and welfare schemes.
-</p>
+        // Scroll reveal animation
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
 
-<p>
-© 2026 EDUSCHEME | Academic Project
-</p>
-
-</footer>
-
-<script>
-
-const counters = document.querySelectorAll('.counter');
-
-counters.forEach(counter => {
-
-const target = +counter.innerText;
-
-let count = 0;
-
-const update = () => {
-
-count += Math.ceil(target / 40);
-
-if(count < target){
-counter.innerText = count;
-setTimeout(update,30);
-}else{
-counter.innerText = target;
-}
-
-}
-
-update();
-
-});
-
-</script>
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    </script>
 
 </body>
 
